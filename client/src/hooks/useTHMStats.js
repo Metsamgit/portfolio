@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 
-const THM_USERNAME = 'METSAM'
-
-// CORS proxy pour contourner les restrictions
-const CORS_PROXY = 'https://api.allorigins.win/raw?url='
+// URL de l'API - fallback sur prod si pas de .env
+const API_URL = import.meta.env.VITE_API_URL || 'http://quantum-network.fr:3001'
 
 export const useTHMStats = () => {
   const [stats, setStats] = useState({
@@ -16,21 +14,16 @@ export const useTHMStats = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        // Fetch rank via CORS proxy
-        const rankRes = await fetch(
-          `${CORS_PROXY}${encodeURIComponent(`https://tryhackme.com/api/user/rank/${THM_USERNAME}`)}`
-        )
-        const rankData = await rankRes.json()
+        const response = await fetch(`${API_URL}/api/thm/stats`)
+        const data = await response.json()
 
-        // Fetch badges via CORS proxy
-        const badgesRes = await fetch(
-          `${CORS_PROXY}${encodeURIComponent(`https://tryhackme.com/api/badges/get/${THM_USERNAME}`)}`
-        )
-        const badgesData = await badgesRes.json()
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch THM stats')
+        }
 
         setStats({
-          rank: rankData.userRank,
-          badges: Array.isArray(badgesData) ? badgesData : [],
+          rank: data.rank,
+          badges: data.badges || [],
           loading: false,
           error: null,
         })

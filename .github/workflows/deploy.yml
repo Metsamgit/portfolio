@@ -18,18 +18,47 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
+      # Build Client
+      - name: Install client dependencies
         run: npm ci
+        working-directory: ./client
 
-      - name: Build
+      - name: Build client
         run: npm run build
+        working-directory: ./client
+        env:
+          VITE_API_URL: http://quantum-network.fr:3001
 
-      - name: Deploy to VPS
+      # Deploy Client
+      - name: Deploy client to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "dist/*"
+          source: "client/dist/*"
           target: ${{ secrets.VPS_PATH }}
+          strip_components: 2
+
+      # Deploy Server
+      - name: Deploy server to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "server/*"
+          target: ${{ secrets.VPS_PATH }}/api
           strip_components: 1
+
+      # Restart API via PM2
+      - name: Restart API server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd ${{ secrets.VPS_PATH }}/api
+            npm install --production
+            pm2 restart portfolio-api || pm2 start index.js --name portfolio-api
