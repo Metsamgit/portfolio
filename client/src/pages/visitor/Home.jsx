@@ -1,16 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Github, ExternalLink, Terminal, Activity, Target, Zap } from 'lucide-react'
+import { Github, ExternalLink, Terminal, Activity, FileText, Folder, Star } from 'lucide-react'
 import THMStats from '../../components/THMStats'
-import { useTHMStats } from '../../hooks/useTHMStats'
 
 const Home = () => {
-  const [stats, setStats] = useState({
-    repos: 0,
-    commits: 0,
-  })
-
-  const { rank: thmRank, badges: thmBadges, loading: thmLoading } = useTHMStats()
+  const [stats, setStats] = useState({ repos: 0 })
+  const [recentRepos, setRecentRepos] = useState([])
 
   const [typedCommand, setTypedCommand] = useState('')
   const fullCommand = 'whoami && cat /etc/motd'
@@ -28,12 +23,21 @@ const Home = () => {
     return () => clearInterval(timer)
   }, [])
 
-  // Fetch GitHub stats (basique)
+  // Fetch GitHub stats et repos récents
   useEffect(() => {
     fetch('https://api.github.com/users/Metsamgit')
       .then(res => res.json())
       .then(data => {
-        setStats(prev => ({ ...prev, repos: data.public_repos || 0 }))
+        setStats({ repos: data.public_repos || 0 })
+      })
+      .catch(() => {})
+
+    fetch('https://api.github.com/users/Metsamgit/repos?sort=updated&per_page=3')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setRecentRepos(data)
+        }
       })
       .catch(() => {})
   }, [])
@@ -66,7 +70,6 @@ const Home = () => {
     <div className="space-y-8">
       {/* Terminal Hero */}
       <section className="bg-cyber-dark rounded-xl border border-cyber-green/20 overflow-hidden">
-        {/* Terminal header */}
         <div className="flex items-center gap-2 px-4 py-2 bg-cyber-darker border-b border-cyber-green/20">
           <div className="flex gap-1.5">
             <span className="w-3 h-3 rounded-full bg-red-500/80" />
@@ -76,7 +79,6 @@ const Home = () => {
           <span className="text-cyber-green/60 font-mono text-sm ml-2">metsam@kali:~</span>
         </div>
 
-        {/* Terminal content */}
         <div className="p-6 font-mono text-sm">
           <div className="text-gray-500 mb-2">
             <span className="text-cyber-green">metsam@kali</span>
@@ -104,17 +106,16 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Stats Grid */}
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {/* Stats Grid - Simplifié */}
+      <section className="grid grid-cols-3 gap-4">
         {[
           { label: 'Repos GitHub', value: stats.repos, icon: Github },
-          { label: 'THM Rank', value: thmLoading ? '...' : `#${thmRank?.toLocaleString() || '?'}`, icon: Target },
-          { label: 'THM Badges', value: thmLoading ? '...' : thmBadges?.length || 0, icon: Zap },
+          { label: 'Writeups', value: 4, icon: FileText },
           { label: 'Status', value: 'Active', icon: Activity },
         ].map((stat, i) => (
           <div
             key={i}
-            className="bg-cyber-dark rounded-xl p-4 border border-cyber-green/20 hover:border-cyber-green/40 transition-colors"
+            className="bg-cyber-dark rounded-xl p-4 border border-gray-800 hover:border-cyber-green/40 transition-colors"
           >
             <stat.icon className="w-5 h-5 text-cyber-green mb-2" />
             <p className="text-2xl font-mono font-bold text-white">{stat.value}</p>
@@ -141,27 +142,57 @@ const Home = () => {
         ))}
       </section>
 
-      {/* TryHackMe Stats */}
-      <THMStats />
-
-      {/* Recent Activity Placeholder */}
-      <section className="bg-cyber-dark rounded-xl p-6 border border-cyber-green/20">
+      {/* Projets GitHub récents */}
+      <section>
         <h2 className="text-lg font-semibold text-white mb-4 font-mono flex items-center gap-2">
-          <span className="text-cyber-green">$</span> recent_activity --limit 5
+          <Star className="w-5 h-5 text-cyber-green" />
+          Projets récents
         </h2>
-        <div className="space-y-3 font-mono text-sm">
-          {[
-            { action: 'push', target: 'vm-setup-scripts', time: 'récemment' },
-            { action: 'complete', target: 'THM: Blue Room', time: '2 jours' },
-            { action: 'update', target: 'soc-lab-config', time: '1 semaine' },
-          ].map((item, i) => (
-            <div key={i} className="flex items-center gap-3 text-gray-400">
-              <span className="text-cyber-green">[{item.action}]</span>
-              <span className="text-white">{item.target}</span>
-              <span className="text-gray-600">• {item.time}</span>
-            </div>
+        <div className="grid md:grid-cols-3 gap-4">
+          {recentRepos.map((repo) => (
+            <a
+              key={repo.id}
+              href={repo.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-cyber-dark rounded-xl p-5 border border-gray-800 hover:border-cyber-green/50 transition-all"
+            >
+              <div className="flex items-start justify-between mb-2">
+                <Folder className="w-6 h-6 text-cyber-green" />
+                <ExternalLink className="w-4 h-4 text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <h3 className="text-white font-semibold mb-1 group-hover:text-cyber-green transition-colors">
+                {repo.name}
+              </h3>
+              <p className="text-gray-500 text-sm line-clamp-2">
+                {repo.description || 'Pas de description'}
+              </p>
+              {repo.language && (
+                <p className="text-cyber-green/70 text-xs mt-2 font-mono">{repo.language}</p>
+              )}
+            </a>
           ))}
         </div>
+      </section>
+
+      {/* Plateformes - discret */}
+      <section className="flex flex-wrap gap-4">
+        <THMStats />
+        <a
+          href="https://github.com/Metsamgit"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group bg-cyber-dark rounded-xl p-4 border border-gray-800 hover:border-cyber-green/50 transition-all flex items-center gap-4"
+        >
+          <Github className="w-10 h-10 text-white" />
+          <div>
+            <p className="text-white font-semibold text-sm flex items-center gap-2">
+              GitHub
+              <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </p>
+            <p className="text-gray-400 font-mono text-xs">@Metsamgit</p>
+          </div>
+        </a>
       </section>
     </div>
   )
