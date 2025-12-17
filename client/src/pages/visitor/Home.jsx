@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Github, ExternalLink, Terminal, Activity, FileText, Folder, Star } from 'lucide-react'
+import { Github, ExternalLink, Terminal, Activity, Folder, Star } from 'lucide-react'
 import THMStats from '../../components/THMStats'
 
 const Home = () => {
@@ -42,27 +42,27 @@ const Home = () => {
       .catch(() => {})
   }, [])
 
-  const quickLinks = [
+  const sections = [
     {
       title: 'Projets GitHub',
-      desc: 'Scripts, labs, et outils de sécurité',
+      stat: stats.repos,
+      desc: 'Scripts, labs, et outils',
       to: '/visitor/projects',
       icon: Github,
-      color: 'cyber-green',
     },
     {
       title: 'Writeups',
-      desc: 'CTF et challenges documentés',
+      stat: 4,
+      desc: 'CTF documentés',
       to: '/visitor/writeups',
       icon: Terminal,
-      color: 'cyber-purple',
     },
     {
       title: 'Mon Lab',
-      desc: 'Infrastructure SOC et pentest',
+      stat: null,
+      desc: 'Infrastructure SOC',
       to: '/visitor/lab',
       icon: Activity,
-      color: 'cyber-blue',
     },
   ]
 
@@ -106,38 +106,25 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Stats Grid - Simplifié */}
-      <section className="grid grid-cols-3 gap-4">
-        {[
-          { label: 'Repos GitHub', value: stats.repos, icon: Github },
-          { label: 'Writeups', value: 4, icon: FileText },
-          { label: 'Status', value: 'Active', icon: Activity },
-        ].map((stat, i) => (
-          <div
-            key={i}
-            className="bg-cyber-dark rounded-xl p-4 border border-gray-800 hover:border-cyber-green/40 transition-colors"
-          >
-            <stat.icon className="w-5 h-5 text-cyber-green mb-2" />
-            <p className="text-2xl font-mono font-bold text-white">{stat.value}</p>
-            <p className="text-gray-500 text-sm font-mono">{stat.label}</p>
-          </div>
-        ))}
-      </section>
-
-      {/* Quick Links */}
-      <section className="grid md:grid-cols-3 gap-6">
-        {quickLinks.map((link, i) => (
+      {/* Navigation unifiée */}
+      <section className="grid md:grid-cols-3 gap-4">
+        {sections.map((section, i) => (
           <Link
             key={i}
-            to={link.to}
-            className={`group bg-cyber-dark rounded-xl p-6 border border-gray-800 hover:border-${link.color}/50 transition-all hover:glow-green`}
+            to={section.to}
+            className="group bg-cyber-dark rounded-xl p-5 border border-gray-800 hover:border-cyber-green/50 transition-all"
           >
-            <link.icon className={`w-8 h-8 text-${link.color} mb-4 group-hover:scale-110 transition-transform`} />
-            <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-              {link.title}
-              <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="flex items-center justify-between mb-3">
+              <section.icon className="w-6 h-6 text-cyber-green" />
+              {section.stat !== null && (
+                <span className="text-2xl font-mono font-bold text-white">{section.stat}</span>
+              )}
+            </div>
+            <h3 className="text-white font-semibold flex items-center gap-2">
+              {section.title}
+              <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-cyber-green" />
             </h3>
-            <p className="text-gray-400 text-sm font-mono">{link.desc}</p>
+            <p className="text-gray-500 text-sm font-mono">{section.desc}</p>
           </Link>
         ))}
       </section>
@@ -175,7 +162,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Plateformes - discret */}
+      {/* Plateformes */}
       <section className="flex flex-wrap gap-4">
         <THMStats />
         <a
