@@ -81,7 +81,7 @@ const Contact = () => {
 
         {/* Quick Download */}
         <a
-          href="/cv-metsam.pdf"
+          href="/cv-nathan-jupin.pdf"
           download
           className="block bg-cyber-blue/10 border border-cyber-blue/30 rounded-xl p-6 hover:bg-cyber-blue/20 transition-colors"
         >

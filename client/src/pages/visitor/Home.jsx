@@ -76,12 +76,12 @@ const Home = () => {
             <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
             <span className="w-3 h-3 rounded-full bg-green-500/80" />
           </div>
-          <span className="text-cyber-green/60 font-mono text-sm ml-2">metsam@kali:~</span>
+          <span className="text-cyber-green/60 font-mono text-sm ml-2">nathan@kali:~</span>
         </div>
 
         <div className="p-6 font-mono text-sm">
           <div className="text-gray-500 mb-2">
-            <span className="text-cyber-green">metsam@kali</span>
+            <span className="text-cyber-green">nathan@kali</span>
             <span className="text-white">:</span>
             <span className="text-cyber-blue">~</span>
             <span className="text-white">$ </span>
@@ -90,7 +90,7 @@ const Home = () => {
           </div>
 
           <div className="mt-4 space-y-2 text-gray-300">
-            <p><span className="text-cyber-green">USER:</span> METSAM</p>
+            <p><span className="text-cyber-green">USER:</span> Nathan Jupin</p>
             <p><span className="text-cyber-green">ROLE:</span> Cybersecurity Student @ Ynov</p>
             <p><span className="text-cyber-green">FOCUS:</span> SOC Analysis | Penetration Testing</p>
             <p><span className="text-cyber-green">STATUS:</span> <span className="text-green-400">● Active</span></p>

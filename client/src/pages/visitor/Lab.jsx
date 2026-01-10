@@ -70,7 +70,7 @@ const Lab = () => {
       <section className="bg-cyber-dark rounded-xl p-6 border border-cyber-green/20">
         <div className="font-mono">
           <p className="text-gray-500 mb-2">
-            <span className="text-cyber-green">metsam@kali</span>:<span className="text-cyber-blue">~/lab</span>$ ./status.sh
+            <span className="text-cyber-green">nathan@kali</span>:<span className="text-cyber-blue">~/lab</span>$ ./status.sh
           </p>
           <h1 className="text-2xl font-bold text-white mb-2">Mon Lab Cybersécurité</h1>
           <p className="text-gray-400">Infrastructure personnelle pour SOC et pentest</p>

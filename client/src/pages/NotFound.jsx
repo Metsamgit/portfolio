@@ -39,12 +39,12 @@ const NotFound = () => {
             <span className='w-3 h-3 rounded-full bg-yellow-500/80' />
             <span className='w-3 h-3 rounded-full bg-green-500/80' />
           </div>
-          <span className='text-cyber-green/60 font-mono text-sm ml-2'>metsam@kali:~</span>
+          <span className='text-cyber-green/60 font-mono text-sm ml-2'>nathan@kali:~</span>
         </div>
 
         <div className='p-6 font-mono'>
           <div className='mb-4'>
-            <span className='text-cyber-green'>metsam@kali</span>
+            <span className='text-cyber-green'>nathan@kali</span>
             <span className='text-white'>:</span>
             <span className='text-cyber-blue'>~</span>
             <span className='text-white'>$ </span>

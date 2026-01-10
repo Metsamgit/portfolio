@@ -25,7 +25,7 @@ const VisitorLayout = () => {
             <div className="h-4 w-px bg-cyber-green/30" />
             <div className="flex items-center gap-2">
               <span className="text-cyber-green font-mono">$</span>
-              <span className="font-mono text-white font-semibold">METSAM</span>
+              <span className="font-mono text-white font-semibold">Nathan Jupin</span>
               <span className="px-2 py-0.5 bg-cyber-green/10 text-cyber-green text-xs rounded font-mono border border-cyber-green/20">
                 visitor
               </span>
@@ -100,7 +100,7 @@ const VisitorLayout = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 font-mono text-sm text-gray-500">
               <span className="text-cyber-green">~</span>
-              <span>METSAM@portfolio</span>
+              <span>Nathan@portfolio</span>
               <span className="text-cyber-green">$</span>
               <span className="animate-pulse">_</span>
             </div>

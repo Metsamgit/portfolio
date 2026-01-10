@@ -6,7 +6,7 @@ const Landing = () => {
   const navigate = useNavigate()
   const [typedText, setTypedText] = useState('')
   const [showOptions, setShowOptions] = useState(false)
-  const fullText = 'METSAM'
+  const fullText = 'NATHAN JUPIN'
 
   useEffect(() => {
     let index = 0

@@ -10,14 +10,14 @@ const Home = () => {
           <div className="relative">
             <img
               src="./img/PP.jpg"
-              alt="Nathan METSAM"
+              alt="Nathan Jupin"
               className="w-32 h-32 rounded-full object-cover border-2 border-cyber-blue"
             />
           </div>
 
           <div className="text-center md:text-left flex-1">
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-              Nathan <span className="text-cyber-blue">METSAM</span>
+              Nathan <span className="text-cyber-blue">Jupin</span>
             </h1>
             <p className="text-xl text-gray-300 mb-4">
               Étudiant en Cybersécurité
@@ -40,7 +40,7 @@ const Home = () => {
 
           <div className="flex flex-col gap-3">
             <a
-              href="/cv-metsam.pdf"
+              href="/cv-nathan-jupin.pdf"
               download
               className="flex items-center justify-center gap-2 px-6 py-3 bg-cyber-blue text-cyber-dark font-semibold rounded-lg hover:bg-cyber-blue/90 transition-colors"
             >
