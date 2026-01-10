@@ -1,11 +1,10 @@
 import { Outlet, NavLink, Link } from 'react-router-dom'
-import { Home, FolderGit2, FileText, Server, ArrowLeft, Github } from 'lucide-react'
+import { Home, FolderGit2, Server, ArrowLeft, Github } from 'lucide-react'
 
 const VisitorLayout = () => {
   const navItems = [
     { to: '/visitor', icon: Home, label: 'Home', end: true },
     { to: '/visitor/projects', icon: FolderGit2, label: 'Projets' },
-    { to: '/visitor/writeups', icon: FileText, label: 'Writeups' },
     { to: '/visitor/lab', icon: Server, label: 'Mon Lab' },
   ]
 
@@ -99,10 +98,8 @@ const VisitorLayout = () => {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 font-mono text-sm text-gray-500">
-              <span className="text-cyber-green">~</span>
-              <span>Nathan@portfolio</span>
               <span className="text-cyber-green">$</span>
-              <span className="animate-pulse">_</span>
+              <span>Nathan Jupin • Cybersecurity Portfolio</span>
             </div>
             <div className="flex items-center gap-6">
               <a

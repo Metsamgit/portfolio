@@ -12,7 +12,6 @@ import RecruiterContact from './pages/recruiter/Contact'
 // Visitor pages
 import VisitorHome from './pages/visitor/Home'
 import VisitorProjects from './pages/visitor/Projects'
-import VisitorWriteups from './pages/visitor/Writeups'
 import VisitorLab from './pages/visitor/Lab'
 
 // 404 page
@@ -36,7 +35,6 @@ function App() {
       <Route path="/visitor" element={<VisitorLayout />}>
         <Route index element={<VisitorHome />} />
         <Route path="projects" element={<VisitorProjects />} />
-        <Route path="writeups" element={<VisitorWriteups />} />
         <Route path="lab" element={<VisitorLab />} />
       </Route>
 
