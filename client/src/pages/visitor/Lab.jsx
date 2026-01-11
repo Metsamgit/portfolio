@@ -1,8 +1,6 @@
-import { Server, Monitor, Shield, Network, Database, Terminal, Cpu, HardDrive, Activity, Clock, MemoryStick } from 'lucide-react'
-import { useServerStats } from '../../hooks/useServerStats'
+import { Server, Monitor, Shield, Network, Database, Terminal, Cpu, HardDrive } from 'lucide-react'
 
 const Lab = () => {
-  const { stats, loading, error } = useServerStats()
 
   const labComponents = [
     {
@@ -80,100 +78,12 @@ const Lab = () => {
         </div>
       </section>
 
-      {/* Live Infrastructure Stats */}
+      {/* Live Infrastructure Stats - Coming Soon */}
+      {/*
       <section className="bg-cyber-dark rounded-xl p-6 border border-cyber-green/30">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-white font-mono flex items-center gap-2">
-            <Activity className="w-5 h-5 text-cyber-green" />
-            Serveur Dédié - Live
-          </h2>
-          {!loading && !error && stats?.server?.status === 'online' && (
-            <span className="px-3 py-1 bg-green-500/20 text-green-400 text-xs rounded-full font-mono flex items-center gap-1">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              Online
-            </span>
-          )}
-          {error && (
-            <span className="px-3 py-1 bg-gray-500/20 text-gray-400 text-xs rounded-full font-mono">
-              Offline
-            </span>
-          )}
-        </div>
-
-        {loading ? (
-          <div className="flex items-center justify-center py-8">
-            <div className="animate-spin w-6 h-6 border-2 border-cyber-green border-t-transparent rounded-full" />
-          </div>
-        ) : error ? (
-          <p className="text-gray-500 text-sm font-mono py-4">
-            Serveur non accessible - les stats seront disponibles quand l'API sera configurée
-          </p>
-        ) : stats ? (
-          <>
-            {/* Server Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-              <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
-                <div className="flex items-center gap-2 text-gray-400 text-xs mb-1">
-                  <Clock className="w-3 h-3" />
-                  Uptime
-                </div>
-                <p className="text-2xl font-bold text-white font-mono">{stats.server.uptime}j</p>
-              </div>
-              <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
-                <div className="flex items-center gap-2 text-gray-400 text-xs mb-1">
-                  <Cpu className="w-3 h-3" />
-                  CPU Load
-                </div>
-                <p className="text-2xl font-bold text-white font-mono">{stats.server.cpu}</p>
-              </div>
-              <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
-                <div className="flex items-center gap-2 text-gray-400 text-xs mb-1">
-                  <MemoryStick className="w-3 h-3" />
-                  RAM
-                </div>
-                <p className="text-2xl font-bold text-white font-mono">{stats.server.memory}%</p>
-              </div>
-              <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
-                <div className="flex items-center gap-2 text-gray-400 text-xs mb-1">
-                  <Server className="w-3 h-3" />
-                  VMs Actives
-                </div>
-                <p className="text-2xl font-bold text-white font-mono">{stats.server.vms}</p>
-              </div>
-            </div>
-
-            {/* Wazuh Stats */}
-            {stats.wazuh && (
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Shield className="w-4 h-4 text-cyber-blue" />
-                    <span className="text-gray-400 text-sm">Agents Wazuh</span>
-                  </div>
-                  <p className="text-3xl font-bold text-white font-mono">
-                    <span className="text-cyber-green">{stats.wazuh.agents.active}</span>
-                    <span className="text-gray-500 text-lg">/{stats.wazuh.agents.total}</span>
-                  </p>
-                  <p className="text-gray-500 text-xs mt-1">agents actifs</p>
-                </div>
-                <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Activity className="w-4 h-4 text-cyber-blue" />
-                    <span className="text-gray-400 text-sm">Alertes aujourd'hui</span>
-                  </div>
-                  <p className="text-3xl font-bold text-white font-mono">{stats.wazuh.alerts.today}</p>
-                  {stats.wazuh.alerts.critical > 0 && (
-                    <p className="text-red-400 text-xs mt-1">{stats.wazuh.alerts.critical} critiques</p>
-                  )}
-                  {stats.wazuh.alerts.critical === 0 && (
-                    <p className="text-green-400 text-xs mt-1">0 critique</p>
-                  )}
-                </div>
-              </div>
-            )}
-          </>
-        ) : null}
+        Section désactivée - En attente de configuration API serveur dédié
       </section>
+      */}
 
       {/* Components Grid */}
       <section>
