@@ -1,25 +1,35 @@
-import { Server, Monitor, Shield, Network, Database, Terminal, Cpu, HardDrive } from 'lucide-react'
+import { Server, Monitor, Shield, Network, Database, Terminal, Cpu, HardDrive, Activity, Clock, MemoryStick } from 'lucide-react'
+import { useServerStats } from '../../hooks/useServerStats'
 
 const Lab = () => {
+  const { stats, loading, error } = useServerStats()
+
   const labComponents = [
     {
-      name: 'SIEM - ELK Stack',
-      description: 'Elasticsearch, Logstash, Kibana pour la centralisation et l\'analyse des logs',
-      icon: Database,
+      name: 'SIEM - Wazuh',
+      description: 'Monitoring de sécurité et détection d\'intrusions en production',
+      icon: Shield,
       status: 'running',
-      specs: ['Elasticsearch 8.x', 'Kibana dashboards', 'Logstash pipelines'],
+      specs: ['Wazuh Manager', 'Agents sur VMs', 'Alertes temps réel'],
     },
     {
       name: 'IDS/IPS - Suricata',
       description: 'Détection d\'intrusion réseau avec règles personnalisées',
-      icon: Shield,
+      icon: Network,
       status: 'running',
       specs: ['Rules ET Open', 'Custom signatures', 'EVE JSON logs'],
     },
     {
+      name: 'SIEM - Splunk',
+      description: 'Analyse de logs et dashboards pour le lab local',
+      icon: Database,
+      status: 'running',
+      specs: ['Splunk Enterprise', 'Custom dashboards', 'Alerting'],
+    },
+    {
       name: 'Firewall - pfSense',
       description: 'Pare-feu et routage pour segmenter le lab',
-      icon: Network,
+      icon: Shield,
       status: 'running',
       specs: ['VLANs', 'NAT/PAT', 'VPN'],
     },
@@ -36,13 +46,6 @@ const Lab = () => {
       icon: Terminal,
       status: 'running',
       specs: ['Nmap', 'Metasploit', 'Burp Suite'],
-    },
-    {
-      name: 'Windows AD',
-      description: 'Environnement Active Directory pour tests',
-      icon: Server,
-      status: 'standby',
-      specs: ['DC Windows Server', 'Clients W10', 'GPO testing'],
     },
   ]
 
@@ -75,6 +78,101 @@ const Lab = () => {
           <h1 className="text-2xl font-bold text-white mb-2">Mon Lab Cybersécurité</h1>
           <p className="text-gray-400">Infrastructure personnelle pour SOC et pentest</p>
         </div>
+      </section>
+
+      {/* Live Infrastructure Stats */}
+      <section className="bg-cyber-dark rounded-xl p-6 border border-cyber-green/30">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-white font-mono flex items-center gap-2">
+            <Activity className="w-5 h-5 text-cyber-green" />
+            Serveur Dédié - Live
+          </h2>
+          {!loading && !error && stats?.server?.status === 'online' && (
+            <span className="px-3 py-1 bg-green-500/20 text-green-400 text-xs rounded-full font-mono flex items-center gap-1">
+              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+              Online
+            </span>
+          )}
+          {error && (
+            <span className="px-3 py-1 bg-gray-500/20 text-gray-400 text-xs rounded-full font-mono">
+              Offline
+            </span>
+          )}
+        </div>
+
+        {loading ? (
+          <div className="flex items-center justify-center py-8">
+            <div className="animate-spin w-6 h-6 border-2 border-cyber-green border-t-transparent rounded-full" />
+          </div>
+        ) : error ? (
+          <p className="text-gray-500 text-sm font-mono py-4">
+            Serveur non accessible - les stats seront disponibles quand l'API sera configurée
+          </p>
+        ) : stats ? (
+          <>
+            {/* Server Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+              <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
+                <div className="flex items-center gap-2 text-gray-400 text-xs mb-1">
+                  <Clock className="w-3 h-3" />
+                  Uptime
+                </div>
+                <p className="text-2xl font-bold text-white font-mono">{stats.server.uptime}j</p>
+              </div>
+              <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
+                <div className="flex items-center gap-2 text-gray-400 text-xs mb-1">
+                  <Cpu className="w-3 h-3" />
+                  CPU Load
+                </div>
+                <p className="text-2xl font-bold text-white font-mono">{stats.server.cpu}</p>
+              </div>
+              <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
+                <div className="flex items-center gap-2 text-gray-400 text-xs mb-1">
+                  <MemoryStick className="w-3 h-3" />
+                  RAM
+                </div>
+                <p className="text-2xl font-bold text-white font-mono">{stats.server.memory}%</p>
+              </div>
+              <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
+                <div className="flex items-center gap-2 text-gray-400 text-xs mb-1">
+                  <Server className="w-3 h-3" />
+                  VMs Actives
+                </div>
+                <p className="text-2xl font-bold text-white font-mono">{stats.server.vms}</p>
+              </div>
+            </div>
+
+            {/* Wazuh Stats */}
+            {stats.wazuh && (
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Shield className="w-4 h-4 text-cyber-blue" />
+                    <span className="text-gray-400 text-sm">Agents Wazuh</span>
+                  </div>
+                  <p className="text-3xl font-bold text-white font-mono">
+                    <span className="text-cyber-green">{stats.wazuh.agents.active}</span>
+                    <span className="text-gray-500 text-lg">/{stats.wazuh.agents.total}</span>
+                  </p>
+                  <p className="text-gray-500 text-xs mt-1">agents actifs</p>
+                </div>
+                <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Activity className="w-4 h-4 text-cyber-blue" />
+                    <span className="text-gray-400 text-sm">Alertes aujourd'hui</span>
+                  </div>
+                  <p className="text-3xl font-bold text-white font-mono">{stats.wazuh.alerts.today}</p>
+                  {stats.wazuh.alerts.critical > 0 && (
+                    <p className="text-red-400 text-xs mt-1">{stats.wazuh.alerts.critical} critiques</p>
+                  )}
+                  {stats.wazuh.alerts.critical === 0 && (
+                    <p className="text-green-400 text-xs mt-1">0 critique</p>
+                  )}
+                </div>
+              </div>
+            )}
+          </>
+        ) : null}
       </section>
 
       {/* Components Grid */}
@@ -120,9 +218,9 @@ const Lab = () => {
             {
               title: 'Blue Team / SOC',
               items: [
-                'Analyse de logs avec ELK',
+                'Monitoring avec Wazuh',
                 'Détection d\'intrusion (Suricata)',
-                'Threat hunting',
+                'Analyse de logs avec Splunk',
                 'Incident response practice',
               ],
             },
@@ -155,20 +253,20 @@ const Lab = () => {
       <section className="bg-cyber-dark rounded-xl p-6 border border-gray-800">
         <h2 className="text-lg font-semibold text-white mb-4 font-mono flex items-center gap-2">
           <Cpu className="w-5 h-5 text-cyber-blue" />
-          Hardware / Virtualisation
+          Infrastructure
         </h2>
         <div className="grid md:grid-cols-3 gap-4 font-mono text-sm">
           <div className="bg-cyber-darker rounded-lg p-4">
-            <p className="text-gray-500 mb-1">Hypervisor</p>
+            <p className="text-gray-500 mb-1">Serveur Dédié</p>
+            <p className="text-white">Production VMs</p>
+          </div>
+          <div className="bg-cyber-darker rounded-lg p-4">
+            <p className="text-gray-500 mb-1">Lab Local</p>
             <p className="text-white">VMware / VirtualBox</p>
           </div>
           <div className="bg-cyber-darker rounded-lg p-4">
-            <p className="text-gray-500 mb-1">RAM Total</p>
-            <p className="text-white">32 GB alloués</p>
-          </div>
-          <div className="bg-cyber-darker rounded-lg p-4">
-            <p className="text-gray-500 mb-1">Storage</p>
-            <p className="text-white">500 GB SSD</p>
+            <p className="text-gray-500 mb-1">Monitoring</p>
+            <p className="text-white">Wazuh + Suricata</p>
           </div>
         </div>
       </section>

@@ -28,6 +28,8 @@ jobs:
         working-directory: ./client
         env:
           VITE_API_URL: http://quantum-network.fr:3001
+          VITE_SERVER_API_URL: ${{ secrets.VITE_SERVER_API_URL }}
+          VITE_SERVER_API_TOKEN: ${{ secrets.VITE_SERVER_API_TOKEN }}
 
       # Deploy Client
       - name: Deploy client to VPS

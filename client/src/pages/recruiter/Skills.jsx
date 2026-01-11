@@ -1,93 +1,63 @@
+import { useState } from 'react'
 import { Shield, Terminal, Search, Server } from 'lucide-react'
 
 const Skills = () => {
+  const [hoveredTool, setHoveredTool] = useState(null)
+
   const skillDomains = [
     {
       name: 'SOC / Blue Team',
       icon: Shield,
-      color: 'blue',
+      color: 'cyber-blue',
       description: 'SIEM, détection d\'intrusions, monitoring en production',
       tools: [
-        { name: 'Wazuh', proficiency: 'advanced' },
-        { name: 'Splunk', proficiency: 'advanced' },
-        { name: 'Suricata', proficiency: 'intermediate' },
-        { name: 'Wireshark', proficiency: 'advanced' },
-        { name: 'ELK Stack', proficiency: 'intermediate' },
+        { name: 'Wazuh', detail: 'Déployé en production sur serveur dédié pour monitoring de VMs' },
+        { name: 'Splunk', detail: 'Analyse de logs et création de dashboards dans mon lab' },
+        { name: 'Suricata', detail: 'IDS/IPS en cours d\'intégration sur infra de prod' },
+        { name: 'Wireshark', detail: 'Analyse de trafic réseau, CTF et troubleshooting' },
+        { name: 'ELK Stack', detail: 'Stack de logs pour centralisation et visualisation' },
       ]
     },
     {
       name: 'Penetration Testing',
       icon: Terminal,
-      color: 'green',
+      color: 'cyber-green',
       description: 'Red team, exploitation, tests d\'intrusion',
       tools: [
-        { name: 'Nmap', proficiency: 'advanced' },
-        { name: 'Burp Suite', proficiency: 'advanced' },
-        { name: 'Metasploit', proficiency: 'intermediate' },
-        { name: 'SQLMap', proficiency: 'intermediate' },
-        { name: 'Hydra', proficiency: 'intermediate' },
+        { name: 'Nmap', detail: 'Reconnaissance réseau, scan de ports et services' },
+        { name: 'Burp Suite', detail: 'Tests d\'intrusion web, interception de requêtes' },
+        { name: 'Metasploit', detail: 'Framework d\'exploitation pour CTF' },
+        { name: 'SQLMap', detail: 'Détection et exploitation d\'injections SQL' },
+        { name: 'Hydra', detail: 'Bruteforce d\'authentification' },
       ]
     },
     {
       name: 'Forensics / Reverse',
       icon: Search,
-      color: 'purple',
+      color: 'purple-400',
       description: 'Analyse forensique, reverse engineering',
       tools: [
-        { name: 'Volatility', proficiency: 'intermediate' },
-        { name: 'Autopsy', proficiency: 'intermediate' },
-        { name: 'Ghidra', proficiency: 'beginner' },
-        { name: 'John/Hashcat', proficiency: 'intermediate' },
-        { name: 'FTK Imager', proficiency: 'intermediate' },
+        { name: 'Volatility', detail: 'Analyse de dumps mémoire pour CTF forensics' },
+        { name: 'Autopsy', detail: 'Investigation de systèmes de fichiers' },
+        { name: 'Ghidra', detail: 'Reverse engineering de binaires' },
+        { name: 'John/Hashcat', detail: 'Cracking de mots de passe et hashes' },
+        { name: 'FTK Imager', detail: 'Acquisition et analyse d\'images disque' },
       ]
     },
     {
       name: 'Infrastructure / Virtualisation',
       icon: Server,
-      color: 'orange',
+      color: 'orange-400',
       description: 'Serveurs dédiés, VMs, automatisation',
       tools: [
-        { name: 'Proxmox/VMs', proficiency: 'advanced' },
-        { name: 'Docker', proficiency: 'advanced' },
-        { name: 'Linux Admin', proficiency: 'advanced' },
-        { name: 'pfSense', proficiency: 'advanced' },
-        { name: 'Ansible', proficiency: 'intermediate' },
+        { name: 'Proxmox/VMs', detail: 'Gestion de VMs en production pour clients' },
+        { name: 'Docker', detail: 'Conteneurisation d\'applications et services' },
+        { name: 'Linux Admin', detail: 'Administration serveurs Debian/Ubuntu en prod' },
+        { name: 'pfSense', detail: 'Firewall et routage dans mon lab SOC' },
+        { name: 'Ansible', detail: 'Automatisation de déploiements' },
       ]
     },
   ]
-
-  const proficiencyColors = {
-    beginner: 'text-gray-600',
-    intermediate: 'text-cyber-blue',
-    advanced: 'text-cyber-green'
-  }
-
-  const proficiencyLabels = {
-    beginner: 'Débutant',
-    intermediate: 'Intermédiaire',
-    advanced: 'Avancé'
-  }
-
-  const renderProficiency = (level) => {
-    const dots = level === 'beginner' ? 1 : level === 'intermediate' ? 2 : 3
-    return (
-      <div className="flex gap-1 items-center">
-        {[...Array(3)].map((_, i) => (
-          <div
-            key={i}
-            className={`w-2 h-2 rounded-full ${
-              i < dots ? proficiencyColors[level] : 'text-gray-800'
-            } ${i < dots ? 'opacity-100' : 'opacity-30'}`}
-            style={{
-              backgroundColor: i < dots
-                ? (level === 'advanced' ? '#00ff88' : level === 'intermediate' ? '#00d4ff' : '#6b7280')
-                : '#374151'
-            }}
-          />
-        ))}
-      </div>
-    )
-  }
 
   const certifications = [
     { name: 'En préparation', status: 'SOC Analyst'},
@@ -100,7 +70,7 @@ const Skills = () => {
       {/* Header */}
       <section className="text-center mb-8">
         <h1 className="text-3xl font-bold text-white mb-2">Compétences Techniques</h1>
-        <p className="text-gray-400">Organisées par domaine d'expertise</p>
+        <p className="text-gray-400">Survolez un outil pour voir les détails</p>
       </section>
 
       {/* Skill Domains */}
@@ -111,60 +81,45 @@ const Skills = () => {
             className="bg-cyber-dark rounded-xl p-6 border border-gray-800 hover:border-gray-700 transition-colors"
           >
             <div className="flex items-center gap-3 mb-3">
-              <domain.icon className={`w-6 h-6 text-cyber-${domain.color}`} />
+              <domain.icon className={`w-6 h-6 text-${domain.color}`} />
               <h2 className="text-lg font-semibold text-white">{domain.name}</h2>
             </div>
             <p className="text-gray-400 text-sm mb-4">{domain.description}</p>
 
-            <div className="space-y-3">
-              {domain.tools.map((tool, j) => (
-                <div
-                  key={j}
-                  className="flex items-center justify-between px-3 py-2 bg-cyber-darker rounded-lg border border-gray-700/50"
-                >
-                  <span className="text-white font-medium text-sm">{tool.name}</span>
-                  <div className="flex items-center gap-2">
-                    <span className={`text-xs ${proficiencyColors[tool.proficiency]} hidden sm:inline`}>
-                      {proficiencyLabels[tool.proficiency]}
+            <div className="flex flex-wrap gap-2">
+              {domain.tools.map((tool, j) => {
+                const toolId = `${i}-${j}`
+                return (
+                  <div
+                    key={j}
+                    className="relative"
+                    onMouseEnter={() => setHoveredTool(toolId)}
+                    onMouseLeave={() => setHoveredTool(null)}
+                  >
+                    <span
+                      className={`px-3 py-1.5 bg-cyber-darker rounded-lg border border-gray-700 text-white text-sm font-medium cursor-default transition-all ${
+                        hoveredTool === toolId ? 'border-gray-500 bg-gray-800' : 'hover:border-gray-600'
+                      }`}
+                    >
+                      {tool.name}
                     </span>
-                    {renderProficiency(tool.proficiency)}
+
+                    {/* Tooltip */}
+                    {hoveredTool === toolId && (
+                      <div className="absolute z-20 bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 border border-gray-700 rounded-lg shadow-xl">
+                        <p className="text-gray-300 text-xs leading-relaxed">{tool.detail}</p>
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
+                          <div className="border-8 border-transparent border-t-gray-700" />
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </section>
         ))}
       </div>
-
-      {/* Proficiency Legend */}
-      <section className="bg-cyber-dark rounded-xl p-4 border border-gray-800">
-        <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="flex gap-1">
-              <div className="w-2 h-2 rounded-full bg-gray-500" />
-              <div className="w-2 h-2 rounded-full bg-gray-800 opacity-30" />
-              <div className="w-2 h-2 rounded-full bg-gray-800 opacity-30" />
-            </div>
-            <span className="text-gray-400">Débutant</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex gap-1">
-              <div className="w-2 h-2 rounded-full bg-cyber-blue" />
-              <div className="w-2 h-2 rounded-full bg-cyber-blue" />
-              <div className="w-2 h-2 rounded-full bg-gray-800 opacity-30" />
-            </div>
-            <span className="text-gray-400">Intermédiaire</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex gap-1">
-              <div className="w-2 h-2 rounded-full bg-cyber-green" />
-              <div className="w-2 h-2 rounded-full bg-cyber-green" />
-              <div className="w-2 h-2 rounded-full bg-cyber-green" />
-            </div>
-            <span className="text-gray-400">Avancé</span>
-          </div>
-        </div>
-      </section>
 
       {/* Certifications */}
       <section className="bg-cyber-dark rounded-xl p-6 border border-gray-800">
