@@ -83,18 +83,17 @@ const Home = () => {
         <div className="text-gray-300 space-y-4">
           <p>
             Passionné par la <strong className="text-white">cybersécurité</strong> depuis mes débuts en informatique,
-            j'ai choisi de me spécialiser dans les domaines du <strong className="text-cyber-blue">SOC (Security Operations Center)</strong> et
-            du <strong className="text-cyber-blue">Pentest</strong> pour combiner analyse défensive et approche offensive.
+            je me spécialise dans le <strong className="text-cyber-blue">SOC (Security Operations Center)</strong> et
+            le <strong className="text-cyber-blue">Pentest</strong> pour combiner analyse défensive et approche offensive.
           </p>
           <p>
-            Mon approche : apprendre en faisant. Je monte mes propres labs (Splunk, pfSense, Suricata),
-            je documente mes CTF sur TryHackMe, et je développe des scripts pour automatiser mes analyses.
-            Chaque projet est une opportunité d'apprendre et de progresser.
+            J'administre actuellement un <strong className="text-white">serveur dédié en production</strong> pour une boutique
+            de scripts FiveM/Minecraft, avec gestion de VMs pour les clients. J'y ai déployé <strong className="text-cyber-blue">Wazuh</strong> pour
+            le monitoring et prépare l'intégration de <strong className="text-cyber-blue">Suricata</strong> pour l'analyse réseau.
           </p>
           <p>
-            Mon objectif professionnel : rejoindre une équipe SOC ou Red Team en alternance pour
-            appliquer mes compétences sur des cas réels, tout en préparant des certifications
-            comme OSCP et SOC Analyst.
+            Mon objectif : rejoindre une équipe SOC ou Red Team en alternance pour appliquer
+            mes compétences sur des cas réels, tout en préparant des certifications comme OSCP.
           </p>
         </div>
       </section>
@@ -112,6 +111,12 @@ const Home = () => {
           {[
             {
               year: '2025',
+              title: 'Admin serveur dédié en production',
+              desc: 'Gestion de VMs, déploiement Wazuh & Suricata pour boutique de scripts',
+              current: true
+            },
+            {
+              year: '2025',
               title: 'CTF YNOV - 4 writeups publiés',
               desc: 'Documentation détaillée de challenges en forensics et pentest',
               current: true
@@ -125,7 +130,7 @@ const Home = () => {
             {
               year: '2024',
               title: 'Création de mon lab personnel',
-              desc: 'Stack Splunk, pfSense, Suricata pour simulation d\'attaques',
+              desc: 'Stack Splunk, pfSense pour simulation d\'attaques',
               current: false
             },
             {

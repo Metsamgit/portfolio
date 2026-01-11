@@ -6,13 +6,13 @@ const Skills = () => {
       name: 'SOC / Blue Team',
       icon: Shield,
       color: 'blue',
-      description: 'Analyse de logs, détection d\'intrusions, SIEM',
+      description: 'SIEM, détection d\'intrusions, monitoring en production',
       tools: [
+        { name: 'Wazuh', proficiency: 'advanced' },
         { name: 'Splunk', proficiency: 'advanced' },
-        { name: 'ELK Stack', proficiency: 'advanced' },
         { name: 'Suricata', proficiency: 'intermediate' },
         { name: 'Wireshark', proficiency: 'advanced' },
-        { name: 'Zeek', proficiency: 'intermediate' },
+        { name: 'ELK Stack', proficiency: 'intermediate' },
       ]
     },
     {
@@ -42,16 +42,16 @@ const Skills = () => {
       ]
     },
     {
-      name: 'Infrastructure / DevOps',
+      name: 'Infrastructure / Virtualisation',
       icon: Server,
       color: 'orange',
-      description: 'Administration système, automatisation',
+      description: 'Serveurs dédiés, VMs, automatisation',
       tools: [
+        { name: 'Proxmox/VMs', proficiency: 'advanced' },
         { name: 'Docker', proficiency: 'advanced' },
-        { name: 'Ansible', proficiency: 'intermediate' },
+        { name: 'Linux Admin', proficiency: 'advanced' },
         { name: 'pfSense', proficiency: 'advanced' },
-        { name: 'Linux', proficiency: 'advanced' },
-        { name: 'Git', proficiency: 'advanced' },
+        { name: 'Ansible', proficiency: 'intermediate' },
       ]
     },
   ]

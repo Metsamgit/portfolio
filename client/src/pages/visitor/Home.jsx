@@ -17,15 +17,18 @@ const Home = () => {
               Cybersecurity Student @ Ynov
             </p>
             <p className="text-gray-300 leading-relaxed mb-4">
-              Étudiant B2 en cybersécurité, passionné par le SOC et le pentest.
-              Je développe mes compétences via labs, CTF et projets open source.
+              Étudiant B2 en cybersécurité. J'administre un serveur dédié en production
+              avec Wazuh et Suricata, et je développe mes compétences via CTF et projets concrets.
             </p>
             <div className="flex flex-wrap gap-2">
               <span className="px-3 py-1 bg-cyber-blue/10 text-cyber-blue text-sm rounded font-mono border border-cyber-blue/20">
-                SOC Analysis
+                SOC / Wazuh
               </span>
               <span className="px-3 py-1 bg-cyber-green/10 text-cyber-green text-sm rounded font-mono border border-cyber-green/20">
-                Penetration Testing
+                Pentest
+              </span>
+              <span className="px-3 py-1 bg-purple-500/10 text-purple-400 text-sm rounded font-mono border border-purple-500/20">
+                Infra / VMs
               </span>
             </div>
           </div>
@@ -77,14 +80,14 @@ const Home = () => {
             Mon Lab
           </h3>
           <p className="text-gray-400 text-sm font-mono">
-            Infrastructure SOC personnelle
+            Infrastructure SOC & serveur dédié
           </p>
           <div className="flex gap-2 mt-3">
             <span className="px-2 py-0.5 bg-cyber-green/10 text-cyber-green text-xs rounded font-mono">
-              Splunk
+              Wazuh
             </span>
             <span className="px-2 py-0.5 bg-cyber-green/10 text-cyber-green text-xs rounded font-mono">
-              pfSense
+              Suricata
             </span>
           </div>
         </Link>
