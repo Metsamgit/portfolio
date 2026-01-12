@@ -43,24 +43,24 @@ const Lab = () => {
   const securityMeasures = [
     {
       name: 'SSH Hardening',
-      description: 'Authentification sécurisée par clés cryptographiques',
+      description: 'Authentification sécurisée et accès restreint',
       icon: Lock,
       status: 'active',
-      details: ['Clés asymétriques uniquement', 'Port non-standard', 'Root login désactivé', 'AllowUsers restreint'],
+      details: ['Clés ██████████ uniquement', 'Port ████', 'Root login [DISABLED]', 'AllowUsers [REDACTED]'],
     },
     {
       name: 'Anti-Bruteforce',
-      description: 'Protection automatique contre les attaques par force brute',
+      description: 'Protection automatique contre les attaques',
       icon: Ban,
       status: 'active',
-      details: ['Fail2ban actif', '150+ IPs bannies', 'Monitoring SSH', 'Alertes temps réel'],
+      details: ['Fail2ban actif', '███+ IPs bannies', 'Monitoring actif', 'Alertes temps réel'],
     },
     {
       name: 'Monitoring SOC',
-      description: 'Surveillance centralisée et corrélation des événements',
+      description: 'Surveillance centralisée et corrélation',
       icon: Activity,
       status: 'active',
-      details: ['Logs centralisés', 'Alertes Suricata', 'MITRE ATT&CK mapping', 'Scan vulnérabilités'],
+      details: ['Logs centralisés', 'IDS/IPS alerts', 'MITRE ATT&CK', 'Vuln scanning'],
     },
   ]
 
