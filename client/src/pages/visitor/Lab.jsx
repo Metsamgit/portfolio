@@ -1,41 +1,41 @@
-import { Server, Shield, Network, Cpu, HardDrive, Lock, Activity, AlertTriangle, Eye, Ban } from 'lucide-react'
+import { Server, Shield, Network, Cpu, HardDrive, Lock, Activity, Eye, Ban } from 'lucide-react'
 
 const Lab = () => {
   const labComponents = [
     {
-      name: 'SIEM - Wazuh 4.14',
+      name: 'SIEM - Wazuh',
       description: 'Solution SIEM open source pour la détection et l\'analyse des menaces',
       icon: Shield,
       status: 'running',
       specs: [
         'Wazuh Manager (analyse des logs)',
-        'Wazuh Indexer (OpenSearch)',
+        'Wazuh Indexer (stockage)',
         'Wazuh Dashboard (visualisation)',
         'Agents déployés sur VMs',
       ],
     },
     {
-      name: 'IDS/IPS - Suricata 6.0',
+      name: 'IDS/IPS - Suricata',
       description: 'Détection d\'intrusion réseau avec règles Emerging Threats',
       icon: Eye,
       status: 'running',
       specs: [
-        '47 472 règles ET chargées',
+        '47 000+ règles ET chargées',
         'Intégration Wazuh (eve.json)',
         'Détection réseau temps réel',
         'Mapping MITRE ATT&CK',
       ],
     },
     {
-      name: 'Hyperviseur - Proxmox VE 9.1',
+      name: 'Hyperviseur - Proxmox',
       description: 'Virtualisation des machines pour l\'infrastructure SOC',
       icon: Server,
       status: 'running',
       specs: [
-        'Ryzen 7 Pro 8700GE (8c/16t)',
-        '64 GB RAM DDR5',
-        'Réseau NAT isolé (10.10.10.0/24)',
-        '2 VMs en production',
+        'Multi-VMs de lab',
+        'Réseau NAT isolé',
+        'Stockage LVM',
+        'Snapshots & backups',
       ],
     },
   ]
@@ -46,29 +46,29 @@ const Lab = () => {
       description: 'Authentification sécurisée par clés cryptographiques',
       icon: Lock,
       status: 'active',
-      details: ['Clés ED25519 uniquement', 'Port custom 2222', 'Root login désactivé', 'AllowUsers restreint'],
+      details: ['Clés asymétriques uniquement', 'Port non-standard', 'Root login désactivé', 'AllowUsers restreint'],
     },
     {
       name: 'Anti-Bruteforce',
       description: 'Protection automatique contre les attaques par force brute',
       icon: Ban,
       status: 'active',
-      details: ['Fail2ban actif', '154+ IPs bannies', 'Monitoring SSH', 'Alertes temps réel'],
+      details: ['Fail2ban actif', '150+ IPs bannies', 'Monitoring SSH', 'Alertes temps réel'],
     },
     {
       name: 'Monitoring SOC',
       description: 'Surveillance centralisée et corrélation des événements',
       icon: Activity,
       status: 'active',
-      details: ['Logs centralisés Wazuh', 'Alertes Suricata', 'MITRE ATT&CK mapping', 'Vulnérabilités trackées'],
+      details: ['Logs centralisés', 'Alertes Suricata', 'MITRE ATT&CK mapping', 'Scan vulnérabilités'],
     },
   ]
 
   const metrics = [
-    { label: 'Événements 24h', value: '102', icon: Activity, color: 'cyber-green' },
-    { label: 'IPs bloquées', value: '154+', icon: Ban, color: 'red-400' },
-    { label: 'Vulnérabilités', value: '231', icon: AlertTriangle, color: 'yellow-400' },
+    { label: 'Alertes/jour', value: '100+', icon: Activity, color: 'cyber-green' },
+    { label: 'IPs bloquées', value: '150+', icon: Ban, color: 'red-400' },
     { label: 'Règles IDS', value: '47k+', icon: Eye, color: 'cyber-blue' },
+    { label: 'VMs actives', value: '3+', icon: Server, color: 'purple-400' },
   ]
 
   const getStatusColor = (status) => {
@@ -76,9 +76,8 @@ const Lab = () => {
       running: 'text-green-400 bg-green-400/10',
       active: 'text-green-400 bg-green-400/10',
       ready: 'text-yellow-400 bg-yellow-400/10',
-      standby: 'text-gray-400 bg-gray-400/10',
     }
-    return colors[status] || colors.standby
+    return colors[status] || 'text-gray-400 bg-gray-400/10'
   }
 
   const getStatusText = (status) => {
@@ -86,9 +85,8 @@ const Lab = () => {
       running: '● Running',
       active: '● Active',
       ready: '○ Ready',
-      standby: '◌ Standby',
     }
-    return texts[status] || texts.standby
+    return texts[status] || '◌ Standby'
   }
 
   return (
@@ -97,14 +95,14 @@ const Lab = () => {
       <section className="bg-cyber-dark rounded-xl p-6 border border-cyber-green/20">
         <div className="font-mono">
           <p className="text-gray-500 mb-2">
-            <span className="text-cyber-green">nathan@proxmox</span>:<span className="text-cyber-blue">~/soc</span>$ wazuh-control status
+            <span className="text-cyber-green">nathan@soc</span>:<span className="text-cyber-blue">~/lab</span>$ systemctl status wazuh-manager
           </p>
-          <h1 className="text-2xl font-bold text-white mb-2">Infrastructure SOC - Production</h1>
-          <p className="text-gray-400">Serveur dédié Hetzner avec stack Wazuh + Suricata</p>
+          <h1 className="text-2xl font-bold text-white mb-2">Mon Lab SOC</h1>
+          <p className="text-gray-400">Infrastructure de sécurité sur serveur dédié</p>
         </div>
       </section>
 
-      {/* Live Metrics */}
+      {/* Metrics */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {metrics.map((metric, i) => (
           <div
@@ -186,35 +184,43 @@ const Lab = () => {
         </div>
       </section>
 
-      {/* VMs Details */}
+      {/* Use Cases */}
       <section className="bg-cyber-dark rounded-xl p-6 border border-cyber-green/20">
         <h2 className="text-lg font-semibold text-white mb-4 font-mono">
-          $ cat /etc/vms.conf
+          $ cat use_cases.txt
         </h2>
         <div className="grid md:grid-cols-2 gap-4">
           <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-cyber-green font-semibold">VM Wazuh + Suricata</h3>
-              <span className="text-xs font-mono text-gray-500">10.10.10.4</span>
-            </div>
-            <div className="space-y-2 text-sm font-mono">
-              <p className="text-gray-400"><span className="text-gray-500">CPU:</span> 4 vCPU</p>
-              <p className="text-gray-400"><span className="text-gray-500">RAM:</span> 8 GB</p>
-              <p className="text-gray-400"><span className="text-gray-500">Disk:</span> 100 GB SSD</p>
-              <p className="text-gray-400"><span className="text-gray-500">Role:</span> SIEM + IDS/IPS</p>
-            </div>
+            <h3 className="text-cyber-green font-semibold mb-3">Blue Team / SOC</h3>
+            <ul className="space-y-2">
+              {[
+                'Monitoring avec Wazuh',
+                'Détection d\'intrusion (Suricata)',
+                'Analyse de logs centralisée',
+                'Incident response practice',
+              ].map((item, j) => (
+                <li key={j} className="text-gray-400 text-sm flex items-center gap-2">
+                  <span className="text-cyber-green">→</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-cyber-green font-semibold">VM FiveM Dev</h3>
-              <span className="text-xs font-mono text-gray-500">10.10.10.3</span>
-            </div>
-            <div className="space-y-2 text-sm font-mono">
-              <p className="text-gray-400"><span className="text-gray-500">CPU:</span> 6 vCPU</p>
-              <p className="text-gray-400"><span className="text-gray-500">RAM:</span> 16 GB</p>
-              <p className="text-gray-400"><span className="text-gray-500">Disk:</span> 60 GB SSD</p>
-              <p className="text-gray-400"><span className="text-gray-500">Agent:</span> Wazuh monitored</p>
-            </div>
+            <h3 className="text-cyber-green font-semibold mb-3">Détections actives</h3>
+            <ul className="space-y-2">
+              {[
+                'Brute force SSH',
+                'Scans de ports',
+                'Authentifications suspectes',
+                'Trafic réseau anormal',
+              ].map((item, j) => (
+                <li key={j} className="text-gray-400 text-sm flex items-center gap-2">
+                  <span className="text-cyber-green">→</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -228,11 +234,11 @@ const Lab = () => {
         <div className="flex flex-wrap gap-2">
           {[
             'Valid Accounts (T1078)',
-            'Password Guessing (T1110.001)',
+            'Brute Force (T1110)',
             'SSH (T1021.004)',
             'Network Sniffing (T1040)',
-            'Brute Force (T1110)',
             'Remote Services (T1021)',
+            'System Information Discovery (T1082)',
           ].map((technique, i) => (
             <span
               key={i}
@@ -244,32 +250,27 @@ const Lab = () => {
         </div>
       </section>
 
-      {/* Hardware Specs */}
+      {/* Infrastructure */}
       <section className="bg-cyber-dark rounded-xl p-6 border border-gray-800">
         <h2 className="text-lg font-semibold text-white mb-4 font-mono flex items-center gap-2">
           <Cpu className="w-5 h-5 text-cyber-blue" />
-          Serveur Dédié - Hetzner
+          Infrastructure
         </h2>
-        <div className="grid md:grid-cols-4 gap-4 font-mono text-sm">
+        <div className="grid md:grid-cols-3 gap-4 font-mono text-sm">
           <div className="bg-cyber-darker rounded-lg p-4">
-            <p className="text-gray-500 mb-1">CPU</p>
-            <p className="text-white">Ryzen 7 Pro 8700GE</p>
-            <p className="text-gray-500 text-xs">8 cores / 16 threads</p>
+            <p className="text-gray-500 mb-1">Serveur</p>
+            <p className="text-white">Dédié hébergé</p>
+            <p className="text-gray-500 text-xs">Multi-core / 64GB+ RAM</p>
           </div>
           <div className="bg-cyber-darker rounded-lg p-4">
-            <p className="text-gray-500 mb-1">RAM</p>
-            <p className="text-white">64 GB DDR5</p>
-            <p className="text-gray-500 text-xs">ECC Memory</p>
+            <p className="text-gray-500 mb-1">Virtualisation</p>
+            <p className="text-white">Proxmox VE</p>
+            <p className="text-gray-500 text-xs">Réseau isolé NAT</p>
           </div>
           <div className="bg-cyber-darker rounded-lg p-4">
-            <p className="text-gray-500 mb-1">Storage</p>
-            <p className="text-white">NVMe SSD</p>
-            <p className="text-gray-500 text-xs">LVM Managed</p>
-          </div>
-          <div className="bg-cyber-darker rounded-lg p-4">
-            <p className="text-gray-500 mb-1">Network</p>
-            <p className="text-white">1 Gbit/s</p>
-            <p className="text-gray-500 text-xs">NAT Bridge vmbr1</p>
+            <p className="text-gray-500 mb-1">Monitoring</p>
+            <p className="text-white">Wazuh + Suricata</p>
+            <p className="text-gray-500 text-xs">24/7 actif</p>
           </div>
         </div>
       </section>
