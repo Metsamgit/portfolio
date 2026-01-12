@@ -53,7 +53,7 @@ const Lab = () => {
       description: 'Protection automatique contre les attaques',
       icon: Ban,
       status: 'active',
-      details: ['Fail2ban actif', '███+ IPs bannies', 'Monitoring actif', 'Alertes temps réel'],
+      details: ['Fail2ban actif', '150+ IPs bannies', 'Monitoring actif', 'Alertes temps réel'],
     },
     {
       name: 'Monitoring SOC',
