@@ -15,7 +15,8 @@
       "Bash(mkdir:*)",
       "Bash(gh run list:*)",
       "Bash(timeout:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(curl:*)"
     ]
   }
 }

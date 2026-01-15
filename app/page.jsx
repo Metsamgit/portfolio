@@ -1,11 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { Shield, Terminal, ChevronRight } from 'lucide-react'
 
 export default function Landing() {
-  const router = useRouter()
   const [typedText, setTypedText] = useState('')
   const [showOptions, setShowOptions] = useState(false)
   const fullText = 'NATHAN JUPIN'
@@ -23,14 +22,6 @@ export default function Landing() {
     }, 50)
     return () => clearInterval(timer)
   }, [])
-
-  const handleChoice = (path) => {
-    document.body.style.opacity = '0'
-    setTimeout(() => {
-      router.push(path)
-      document.body.style.opacity = '1'
-    }, 300)
-  }
 
   return (
     <div className="min-h-screen bg-cyber-darker flex flex-col items-center justify-center relative overflow-hidden">
@@ -157,9 +148,9 @@ export default function Landing() {
 
           <div className="flex flex-col md:flex-row gap-6 justify-center">
             {/* Recruiter Card */}
-            <button
-              onClick={() => handleChoice('/recruiter')}
-              className="group relative bg-cyber-dark/80 backdrop-blur-sm border-2 border-gray-700 hover:border-cyber-blue rounded-xl p-6 w-full md:w-72 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(0,212,255,0.15)] cursor-pointer"
+            <Link
+              href="/recruiter"
+              className="group relative bg-cyber-dark/80 backdrop-blur-sm border-2 border-gray-700 hover:border-cyber-blue rounded-xl p-6 w-full md:w-72 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(0,212,255,0.15)]"
             >
               <div className="absolute top-0 right-0 w-20 h-20 bg-cyber-blue/5 rounded-bl-full" />
               <div className="flex items-start justify-between mb-4">
@@ -182,12 +173,12 @@ export default function Landing() {
                 <span>·</span>
                 <span>contact</span>
               </div>
-            </button>
+            </Link>
 
             {/* Visitor Card */}
-            <button
-              onClick={() => handleChoice('/visitor')}
-              className="group relative bg-cyber-dark/80 backdrop-blur-sm border-2 border-gray-700 hover:border-cyber-green rounded-xl p-6 w-full md:w-72 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(0,255,136,0.15)] cursor-pointer"
+            <Link
+              href="/visitor"
+              className="group relative bg-cyber-dark/80 backdrop-blur-sm border-2 border-gray-700 hover:border-cyber-green rounded-xl p-6 w-full md:w-72 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(0,255,136,0.15)]"
             >
               <div className="absolute top-0 right-0 w-20 h-20 bg-cyber-green/5 rounded-bl-full" />
               <div className="flex items-start justify-between mb-4">
@@ -210,7 +201,7 @@ export default function Landing() {
                 <span>·</span>
                 <span>thm</span>
               </div>
-            </button>
+            </Link>
           </div>
         </div>
 

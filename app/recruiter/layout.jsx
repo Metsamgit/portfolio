@@ -57,7 +57,7 @@ export default function RecruiterLayout({ children }) {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/visitor"
-              className="flex items-center gap-2 px-3 py-1.5 text-cyber-green border border-cyber-green/30 rounded-lg text-sm hover:bg-cyber-green/10 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-cyber-green border border-cyber-green/30 rounded-lg text-sm hover:bg-cyber-green/10 transition-colors"
             >
               <Terminal className="w-4 h-4" />
               Visiteur

@@ -1,13 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import NavLink from '@/components/NavLink'
 import { Home, FolderGit2, Server, ArrowLeft, Github, Shield } from 'lucide-react'
 
 const navItems = [
-  { href: '/visitor', icon: Home, label: 'Home', end: true },
-  { href: '/visitor/projects', icon: FolderGit2, label: 'Projets' },
-  { href: '/visitor/lab', icon: Server, label: 'Mon Lab' },
+  { href: '#top', icon: Home, label: 'Home' },
+  { href: '#lab', icon: Server, label: 'Lab SOC' },
+  { href: '#writeups', icon: FolderGit2, label: 'Writeups' },
 ]
 
 export default function VisitorLayout({ children }) {
@@ -36,22 +35,15 @@ export default function VisitorLayout({ children }) {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1">
-            {navItems.map(({ href, icon: Icon, label, end }) => (
-              <NavLink
+            {navItems.map(({ href, icon: Icon, label }) => (
+              <a
                 key={href}
                 href={href}
-                end={end}
-                className={({ isActive }) =>
-                  `relative flex items-center gap-2 px-4 py-2 font-mono text-sm transition-all ${
-                    isActive
-                      ? 'text-cyber-green'
-                      : 'text-gray-400 hover:text-cyber-green'
-                  } ${isActive ? 'after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-cyber-green after:rounded-full' : ''}`
-                }
+                className="flex items-center gap-2 px-4 py-2 font-mono text-sm text-gray-400 hover:text-cyber-green transition-all"
               >
                 <Icon className="w-4 h-4" />
                 {label}
-              </NavLink>
+              </a>
             ))}
           </nav>
 
@@ -59,7 +51,7 @@ export default function VisitorLayout({ children }) {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/recruiter"
-              className="flex items-center gap-2 px-3 py-1.5 text-cyber-blue border border-cyber-blue/30 rounded-lg text-sm hover:bg-cyber-blue/10 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-cyber-blue border border-cyber-blue/30 rounded-lg text-sm hover:bg-cyber-blue/10 transition-colors"
             >
               <Shield className="w-4 h-4" />
               Recruteur
@@ -78,22 +70,15 @@ export default function VisitorLayout({ children }) {
 
         {/* Mobile nav */}
         <nav className="md:hidden flex items-center justify-around py-2 border-t border-cyber-green/10">
-          {navItems.map(({ href, icon: Icon, label, end }) => (
-            <NavLink
+          {navItems.map(({ href, icon: Icon, label }) => (
+            <a
               key={href}
               href={href}
-              end={end}
-              className={({ isActive }) =>
-                `relative flex flex-col items-center gap-1 px-3 py-1 text-xs font-mono transition-all ${
-                  isActive
-                    ? 'text-cyber-green'
-                    : 'text-gray-500 hover:text-cyber-green'
-                } ${isActive ? 'after:absolute after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-4 after:h-0.5 after:bg-cyber-green after:rounded-full' : ''}`
-              }
+              className="flex flex-col items-center gap-1 px-3 py-1 text-xs font-mono text-gray-500 hover:text-cyber-green transition-all"
             >
               <Icon className="w-5 h-5" />
               {label}
-            </NavLink>
+            </a>
           ))}
           <Link
             href="/recruiter"

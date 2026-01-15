@@ -1,20 +1,12 @@
 'use client'
 
 import { MapPin, GraduationCap, Target, Download, Linkedin } from 'lucide-react'
-import AnimatedSection from '@/components/AnimatedSection'
-import AnimatedTimeline from '@/components/AnimatedTimeline'
 
 const timelineItems = [
   {
     year: '2025',
     title: 'Admin serveur dédié en production',
     desc: 'Gestion de VMs, déploiement Wazuh & Suricata pour boutique de scripts',
-    current: true
-  },
-  {
-    year: '2025',
-    title: 'CTF YNOV - 4 writeups publiés',
-    desc: 'Documentation détaillée de challenges en forensics et pentest',
     current: true
   },
   {
@@ -41,8 +33,7 @@ export default function RecruiterHome() {
   return (
     <div className="space-y-8">
       {/* Hero Section */}
-      <AnimatedSection>
-        <section className="bg-gradient-to-br from-cyber-dark to-cyber-darker rounded-2xl p-8 border border-gray-800">
+      <section className="bg-gradient-to-br from-cyber-dark to-cyber-darker rounded-2xl p-8 border border-gray-800">
         <div className="flex flex-col md:flex-row items-center gap-8">
           {/* Avatar */}
           <div className="relative">
@@ -97,33 +88,33 @@ export default function RecruiterHome() {
           </div>
         </div>
         </section>
-      </AnimatedSection>
 
       {/* Quick Stats */}
-      <AnimatedSection delay={100}>
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'Année', value: 'B2', sub: 'Ynov Cyber' },
           { label: 'Orientation', value: 'SOC', sub: '& Pentest' },
           { label: 'Projets', value: '5+', sub: 'GitHub' },
           { label: 'Disponible', value: 'Oui', sub: 'Stage/Alternance' },
         ].map((stat, i) => (
-          <div key={i} className="bg-cyber-dark rounded-xl p-4 border border-gray-800 text-center">
+          <div
+            key={i}
+            className="bg-cyber-dark rounded-xl p-4 border border-gray-800 text-center opacity-0 animate-[fadeSlideIn_0.5s_ease-out_forwards]"
+            style={{ animationDelay: `${i * 100}ms` }}
+          >
+            <p className="text-gray-500 text-xs mb-1">{stat.label}</p>
             <p className="text-2xl font-bold text-cyber-blue">{stat.value}</p>
-            <p className="text-white font-medium">{stat.label}</p>
-            <p className="text-gray-500 text-sm">{stat.sub}</p>
+            <p className="text-gray-400 text-sm">{stat.sub}</p>
           </div>
         ))}
-        </section>
-      </AnimatedSection>
+      </section>
 
       {/* What I'm looking for - PRIORITAIRE */}
-      <AnimatedSection delay={200}>
-        <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
-          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 bg-cyber-blue rounded-full" />
-            Ce que je recherche
-          </h2>
+      <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
+        <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+          <span className="w-2 h-2 bg-cyber-blue rounded-full" />
+          Ce que je recherche
+        </h2>
         <div className="grid md:grid-cols-2 gap-4">
           {[
             {
@@ -143,80 +134,111 @@ export default function RecruiterHome() {
               desc: 'Participation à des audits, analyses d\'incidents, ou red team',
             },
           ].map((item, i) => (
-            <div key={i} className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
+            <div
+              key={i}
+              className="bg-cyber-darker p-4 rounded-xl border border-gray-700 opacity-0 animate-[fadeSlideIn_0.5s_ease-out_forwards]"
+              style={{ animationDelay: `${i * 100}ms` }}
+            >
               <h3 className="font-semibold text-white mb-1">{item.title}</h3>
               <p className="text-gray-400 text-sm">{item.desc}</p>
             </div>
           ))}
         </div>
-        </section>
-      </AnimatedSection>
+      </section>
 
       {/* Soft Skills */}
-      <AnimatedSection delay={300}>
-        <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
-          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 bg-cyber-blue rounded-full" />
-            Soft Skills
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              'Curiosité technique',
-              'Résolution de problèmes',
-              'Veille sécurité',
-              'Travail en équipe',
-              'Autonomie',
-              'Documentation',
-              'Adaptabilité',
-              'Communication',
-            ].map((skill, i) => (
-              <div
-                key={i}
-                className="px-4 py-3 bg-cyber-darker rounded-lg border border-gray-700 text-center text-gray-300 text-sm"
-              >
-                {skill}
-              </div>
-            ))}
-          </div>
-        </section>
-      </AnimatedSection>
+      <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
+        <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+          <span className="w-2 h-2 bg-cyber-blue rounded-full" />
+          Soft Skills
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {[
+            'Curiosité technique',
+            'Résolution de problèmes',
+            'Veille sécurité',
+            'Travail en équipe',
+            'Autonomie',
+            'Documentation',
+            'Adaptabilité',
+            'Communication',
+          ].map((skill, i) => (
+            <span
+              key={i}
+              className="px-3 py-2 bg-cyber-darker rounded-lg border border-gray-700 text-gray-300 text-sm text-center opacity-0 animate-[fadeSlideIn_0.5s_ease-out_forwards]"
+              style={{ animationDelay: `${i * 50}ms` }}
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </section>
 
       {/* About */}
-      <AnimatedSection delay={400}>
-        <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
-          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 bg-cyber-blue rounded-full" />
-            À propos
-          </h2>
-          <div className="text-gray-300 space-y-4">
-            <p>
-              Passionné par la <strong className="text-white">cybersécurité</strong> depuis mes débuts en informatique,
-              je me spécialise dans le <strong className="text-cyber-blue">SOC (Security Operations Center)</strong> et
-              le <strong className="text-cyber-blue">Pentest</strong> pour combiner analyse défensive et approche offensive.
-            </p>
-            <p>
-              J&apos;administre actuellement un <strong className="text-white">serveur dédié en production</strong> pour une boutique
-              de scripts FiveM/Minecraft, avec gestion de VMs pour les clients. J&apos;y ai déployé <strong className="text-cyber-blue">Wazuh</strong> et
-              <strong className="text-cyber-blue"> Suricata</strong> pour le monitoring SOC et la détection d&apos;intrusion.
-            </p>
-            <p>
-              Mon objectif : rejoindre une équipe SOC ou Red Team en alternance pour appliquer
-              mes compétences sur des cas réels, tout en préparant des certifications comme OSCP.
-            </p>
-          </div>
-        </section>
-      </AnimatedSection>
+      <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
+        <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+          <span className="w-2 h-2 bg-cyber-blue rounded-full" />
+          À propos
+        </h2>
+        <div className="text-gray-300 space-y-4">
+          <p>
+            Passionné par la <strong className="text-white">cybersécurité</strong> depuis mes débuts en informatique,
+            je me spécialise dans le <strong className="text-cyber-blue">SOC (Security Operations Center)</strong> et
+            le <strong className="text-cyber-blue">Pentest</strong> pour combiner analyse défensive et approche offensive.
+          </p>
+          <p>
+            J&apos;administre actuellement un <strong className="text-white">serveur dédié en production</strong> pour une boutique
+            de scripts FiveM/Minecraft, avec gestion de VMs pour les clients. J&apos;y ai déployé <strong className="text-cyber-blue">Wazuh</strong> et
+            <strong className="text-cyber-blue"> Suricata</strong> pour le monitoring SOC et la détection d&apos;intrusion.
+          </p>
+          <p>
+            Mon objectif : rejoindre une équipe SOC ou Red Team en alternance pour appliquer
+            mes compétences sur des cas réels, tout en préparant des certifications comme OSCP.
+          </p>
+        </div>
+      </section>
 
-      {/* Timeline avec effet révélation */}
-      <AnimatedSection delay={500}>
-        <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
+      {/* Timeline avec animation CSS */}
+      <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
           <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
             <span className="w-2 h-2 bg-cyber-blue rounded-full" />
             Mon parcours
           </h2>
-          <AnimatedTimeline items={timelineItems} />
+
+          <div className="relative">
+            {timelineItems.map((item, i, arr) => (
+              <div
+                key={i}
+                className={`relative flex gap-6 items-start opacity-0 animate-[fadeSlideIn_0.5s_ease-out_forwards] ${i < arr.length - 1 ? 'pb-6' : ''}`}
+                style={{ animationDelay: `${i * 100}ms` }}
+              >
+                {/* Ligne vers le point suivant - seulement si pas le dernier */}
+                {i < arr.length - 1 && (
+                  <div className="absolute left-[15px] top-8 h-full w-0.5 bg-gradient-to-b from-cyber-blue to-cyber-blue/30" />
+                )}
+
+                {/* Point */}
+                <div className="relative z-10 w-8 h-8 rounded-full border-2 flex items-center justify-center bg-cyber-blue border-cyber-blue shadow-[0_0_15px_rgba(0,212,255,0.5)]">
+                  <div className="w-2 h-2 rounded-full bg-white" />
+                </div>
+
+                {/* Contenu */}
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-1">
+                    <span className="text-cyber-blue font-mono text-sm">{item.year}</span>
+                    {item.current && (
+                      <span className="px-2 py-0.5 bg-cyber-blue/10 text-cyber-blue text-xs rounded-full">
+                        En cours
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                  <p className="text-gray-400 text-sm">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
-      </AnimatedSection>
     </div>
   )
 }

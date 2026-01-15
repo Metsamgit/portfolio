@@ -77,48 +77,51 @@ export default function RecruiterSkills() {
       {/* Skill Domains */}
       <div className="grid md:grid-cols-2 gap-6">
         {skillDomains.map((domain, i) => (
-          <section
+          <div
             key={i}
-            className="bg-cyber-dark rounded-xl p-6 border border-gray-800 hover:border-gray-700 transition-colors"
+            className="opacity-0 animate-[fadeSlideIn_0.5s_ease-out_forwards]"
+            style={{ animationDelay: `${i * 100}ms` }}
           >
-            <div className="flex items-center gap-3 mb-3">
-              <domain.icon className={`w-6 h-6 text-${domain.color}`} />
-              <h2 className="text-lg font-semibold text-white">{domain.name}</h2>
-            </div>
-            <p className="text-gray-400 text-sm mb-4">{domain.description}</p>
+            <section className="bg-cyber-dark rounded-xl p-6 border border-gray-800 hover:border-gray-700 transition-colors h-full">
+              <div className="flex items-center gap-3 mb-3">
+                <domain.icon className={`w-6 h-6 text-${domain.color}`} />
+                <h2 className="text-lg font-semibold text-white">{domain.name}</h2>
+              </div>
+              <p className="text-gray-400 text-sm mb-4">{domain.description}</p>
 
-            <div className="flex flex-wrap gap-2">
-              {domain.tools.map((tool, j) => {
-                const toolId = `${i}-${j}`
-                return (
-                  <div
-                    key={j}
-                    className="relative"
-                    onMouseEnter={() => setHoveredTool(toolId)}
-                    onMouseLeave={() => setHoveredTool(null)}
-                  >
-                    <span
-                      className={`px-3 py-1.5 bg-cyber-darker rounded-lg border border-gray-700 text-white text-sm font-medium cursor-default transition-all ${
-                        hoveredTool === toolId ? 'border-gray-500 bg-gray-800' : 'hover:border-gray-600'
-                      }`}
+              <div className="flex flex-wrap gap-2">
+                {domain.tools.map((tool, j) => {
+                  const toolId = `${i}-${j}`
+                  return (
+                    <div
+                      key={j}
+                      className="relative"
+                      onMouseEnter={() => setHoveredTool(toolId)}
+                      onMouseLeave={() => setHoveredTool(null)}
                     >
-                      {tool.name}
-                    </span>
+                      <span
+                        className={`px-3 py-1.5 bg-cyber-darker rounded-lg border border-gray-700 text-white text-sm font-medium cursor-default transition-all ${
+                          hoveredTool === toolId ? 'border-gray-500 bg-gray-800' : 'hover:border-gray-600'
+                        }`}
+                      >
+                        {tool.name}
+                      </span>
 
-                    {/* Tooltip */}
-                    {hoveredTool === toolId && (
-                      <div className="absolute z-20 bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 border border-gray-700 rounded-lg shadow-xl">
-                        <p className="text-gray-300 text-xs leading-relaxed">{tool.detail}</p>
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
-                          <div className="border-8 border-transparent border-t-gray-700" />
+                      {/* Tooltip */}
+                      {hoveredTool === toolId && (
+                        <div className="absolute z-20 bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 border border-gray-700 rounded-lg shadow-xl">
+                          <p className="text-gray-300 text-xs leading-relaxed">{tool.detail}</p>
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
+                            <div className="border-8 border-transparent border-t-gray-700" />
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          </section>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </section>
+          </div>
         ))}
       </div>
 
@@ -132,7 +135,8 @@ export default function RecruiterSkills() {
           {certifications.map((cert, i) => (
             <div
               key={i}
-              className="bg-cyber-darker rounded-lg p-4 border border-gray-700 text-center"
+              className="bg-cyber-darker p-4 rounded-xl border border-gray-700 text-center opacity-0 animate-[fadeSlideIn_0.5s_ease-out_forwards]"
+              style={{ animationDelay: `${i * 100}ms` }}
             >
               <p className="text-white font-medium text-lg mb-1">{cert.status}</p>
               <p className="text-gray-500 text-sm">{cert.name}</p>
@@ -155,12 +159,13 @@ export default function RecruiterSkills() {
             'Adaptabilité',
             'Communication',
           ].map((skill, i) => (
-            <div
+            <span
               key={i}
-              className="px-4 py-3 bg-cyber-darker rounded-lg border border-gray-700 text-center text-gray-300 text-sm"
+              className="px-3 py-2 bg-cyber-darker rounded-lg border border-gray-700 text-gray-300 text-sm text-center opacity-0 animate-[fadeSlideIn_0.5s_ease-out_forwards]"
+              style={{ animationDelay: `${i * 50}ms` }}
             >
               {skill}
-            </div>
+            </span>
           ))}
         </div>
       </section>
