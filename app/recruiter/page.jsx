@@ -2,6 +2,40 @@
 
 import { MapPin, GraduationCap, Target, Download, Linkedin } from 'lucide-react'
 import AnimatedSection from '@/components/AnimatedSection'
+import AnimatedTimeline from '@/components/AnimatedTimeline'
+
+const timelineItems = [
+  {
+    year: '2025',
+    title: 'Admin serveur dédié en production',
+    desc: 'Gestion de VMs, déploiement Wazuh & Suricata pour boutique de scripts',
+    current: true
+  },
+  {
+    year: '2025',
+    title: 'CTF YNOV - 4 writeups publiés',
+    desc: 'Documentation détaillée de challenges en forensics et pentest',
+    current: true
+  },
+  {
+    year: '2024 - 2025',
+    title: 'B2 Cybersécurité - Ynov Campus',
+    desc: 'Spécialisation SOC & Pentest',
+    current: true
+  },
+  {
+    year: '2024',
+    title: 'Création de mon lab SOC',
+    desc: 'Stack Wazuh, Suricata pour monitoring et détection',
+    current: false
+  },
+  {
+    year: '2023',
+    title: 'Début en cybersécurité',
+    desc: 'Découverte via TryHackMe et premiers scripts',
+    current: false
+  },
+]
 
 export default function RecruiterHome() {
   return (
@@ -173,70 +207,14 @@ export default function RecruiterHome() {
         </section>
       </AnimatedSection>
 
-      {/* Timeline */}
+      {/* Timeline avec effet révélation */}
       <AnimatedSection delay={500}>
         <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
-        <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-          <span className="w-2 h-2 bg-cyber-blue rounded-full" />
-          Mon parcours
-        </h2>
-        <div className="relative space-y-6">
-          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-700" />
-
-          {[
-            {
-              year: '2025',
-              title: 'Admin serveur dédié en production',
-              desc: 'Gestion de VMs, déploiement Wazuh & Suricata pour boutique de scripts',
-              current: true
-            },
-            {
-              year: '2025',
-              title: 'CTF YNOV - 4 writeups publiés',
-              desc: 'Documentation détaillée de challenges en forensics et pentest',
-              current: true
-            },
-            {
-              year: '2024 - 2025',
-              title: 'B2 Cybersécurité - Ynov Campus',
-              desc: 'Spécialisation SOC & Pentest',
-              current: true
-            },
-            {
-              year: '2024',
-              title: 'Création de mon lab SOC',
-              desc: 'Stack Wazuh, Suricata pour monitoring et détection',
-              current: false
-            },
-            {
-              year: '2023',
-              title: 'Début en cybersécurité',
-              desc: 'Découverte via TryHackMe et premiers scripts',
-              current: false
-            },
-          ].map((item, i) => (
-            <div key={i} className="relative flex gap-6 items-start">
-              <div className={`relative z-10 w-8 h-8 rounded-full border-2 flex items-center justify-center ${
-                item.current ? 'bg-cyber-blue border-cyber-blue' : 'bg-cyber-dark border-gray-700'
-              }`}>
-                <div className={`w-2 h-2 rounded-full ${item.current ? 'bg-white' : 'bg-gray-600'}`} />
-              </div>
-
-              <div className="flex-1 pb-8">
-                <div className="flex items-center gap-3 mb-1">
-                  <span className="text-cyber-blue font-mono text-sm">{item.year}</span>
-                  {item.current && (
-                    <span className="px-2 py-0.5 bg-cyber-blue/10 text-cyber-blue text-xs rounded-full font-medium">
-                      En cours
-                    </span>
-                  )}
-                </div>
-                <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-                <p className="text-gray-400 text-sm">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+          <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+            <span className="w-2 h-2 bg-cyber-blue rounded-full" />
+            Mon parcours
+          </h2>
+          <AnimatedTimeline items={timelineItems} />
         </section>
       </AnimatedSection>
     </div>
