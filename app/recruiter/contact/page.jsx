@@ -1,27 +1,27 @@
 import { Linkedin, Github, MapPin, FileDown } from 'lucide-react'
 
-const Contact = () => {
-  const contactInfo = [
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      value: '/in/nathan-jupin-088a12326',
-      href: 'https://www.linkedin.com/in/nathan-jupin-088a12326/',
-    },
-    {
-      icon: Github,
-      label: 'GitHub',
-      value: '@Metsamgit',
-      href: 'https://github.com/Metsamgit',
-    },
-    {
-      icon: MapPin,
-      label: 'Localisation',
-      value: 'Lille, France',
-      href: null,
-    },
-  ]
+const contactInfo = [
+  {
+    icon: Linkedin,
+    label: 'LinkedIn',
+    value: '/in/nathan-jupin-088a12326',
+    href: 'https://www.linkedin.com/in/nathan-jupin-088a12326/',
+  },
+  {
+    icon: Github,
+    label: 'GitHub',
+    value: '@Metsamgit',
+    href: 'https://github.com/Metsamgit',
+  },
+  {
+    icon: MapPin,
+    label: 'Localisation',
+    value: 'Lille, France',
+    href: null,
+  },
+]
 
+export default function RecruiterContact() {
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -93,5 +93,3 @@ const Contact = () => {
     </div>
   )
 }
-
-export default Contact

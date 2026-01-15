@@ -1,15 +1,15 @@
 import { MapPin, GraduationCap, Target, Download, Linkedin } from 'lucide-react'
 
-const Home = () => {
+export default function RecruiterHome() {
   return (
     <div className="space-y-8">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-cyber-dark to-cyber-darker rounded-2xl p-8 border border-gray-800">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          {/* Avatar placeholder */}
+          {/* Avatar */}
           <div className="relative">
             <img
-              src="./img/PP.jpg"
+              src="/img/PP.jpg"
               alt="Nathan Jupin"
               className="w-32 h-32 rounded-full object-cover border-2 border-cyber-blue"
             />
@@ -89,9 +89,9 @@ const Home = () => {
             le <strong className="text-cyber-blue">Pentest</strong> pour combiner analyse défensive et approche offensive.
           </p>
           <p>
-            J'administre actuellement un <strong className="text-white">serveur dédié en production</strong> pour une boutique
-            de scripts FiveM/Minecraft, avec gestion de VMs pour les clients. J'y ai déployé <strong className="text-cyber-blue">Wazuh</strong> et
-            <strong className="text-cyber-blue"> Suricata</strong> pour le monitoring SOC et la détection d'intrusion.
+            J&apos;administre actuellement un <strong className="text-white">serveur dédié en production</strong> pour une boutique
+            de scripts FiveM/Minecraft, avec gestion de VMs pour les clients. J&apos;y ai déployé <strong className="text-cyber-blue">Wazuh</strong> et
+            <strong className="text-cyber-blue"> Suricata</strong> pour le monitoring SOC et la détection d&apos;intrusion.
           </p>
           <p>
             Mon objectif : rejoindre une équipe SOC ou Red Team en alternance pour appliquer
@@ -107,7 +107,6 @@ const Home = () => {
           Mon parcours
         </h2>
         <div className="relative space-y-6">
-          {/* Vertical line */}
           <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-700" />
 
           {[
@@ -143,14 +142,12 @@ const Home = () => {
             },
           ].map((item, i) => (
             <div key={i} className="relative flex gap-6 items-start">
-              {/* Timeline dot */}
               <div className={`relative z-10 w-8 h-8 rounded-full border-2 flex items-center justify-center ${
                 item.current ? 'bg-cyber-blue border-cyber-blue' : 'bg-cyber-dark border-gray-700'
               }`}>
                 <div className={`w-2 h-2 rounded-full ${item.current ? 'bg-white' : 'bg-gray-600'}`} />
               </div>
 
-              {/* Content */}
               <div className="flex-1 pb-8">
                 <div className="flex items-center gap-3 mb-1">
                   <span className="text-cyber-blue font-mono text-sm">{item.year}</span>
@@ -203,5 +200,3 @@ const Home = () => {
     </div>
   )
 }
-
-export default Home
