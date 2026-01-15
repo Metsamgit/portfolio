@@ -18,9 +18,9 @@ export default function Landing() {
         index++
       } else {
         clearInterval(timer)
-        setTimeout(() => setShowOptions(true), 500)
+        setTimeout(() => setShowOptions(true), 200)
       }
-    }, 150)
+    }, 50)
     return () => clearInterval(timer)
   }, [])
 
