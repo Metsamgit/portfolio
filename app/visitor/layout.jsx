@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import NavLink from '@/components/NavLink'
-import { Home, FolderGit2, Server, ArrowLeft, Github } from 'lucide-react'
+import { Home, FolderGit2, Server, ArrowLeft, Github, Shield } from 'lucide-react'
 
 const navItems = [
   { href: '/visitor', icon: Home, label: 'Home', end: true },
@@ -42,11 +42,11 @@ export default function VisitorLayout({ children }) {
                 href={href}
                 end={end}
                 className={({ isActive }) =>
-                  `flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-sm transition-all ${
+                  `relative flex items-center gap-2 px-4 py-2 font-mono text-sm transition-all ${
                     isActive
-                      ? 'bg-cyber-green/10 text-cyber-green border border-cyber-green/30'
-                      : 'text-gray-400 hover:text-cyber-green hover:bg-cyber-green/5'
-                  }`
+                      ? 'text-cyber-green'
+                      : 'text-gray-400 hover:text-cyber-green'
+                  } ${isActive ? 'after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-cyber-green after:rounded-full' : ''}`
                 }
               >
                 <Icon className="w-4 h-4" />
@@ -55,16 +55,25 @@ export default function VisitorLayout({ children }) {
             ))}
           </nav>
 
-          {/* GitHub link */}
-          <a
-            href="https://github.com/Metsamgit"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-2 px-4 py-2 bg-cyber-green/10 text-cyber-green font-mono text-sm rounded-lg border border-cyber-green/30 hover:bg-cyber-green/20 transition-colors"
-          >
-            <Github className="w-4 h-4" />
-            GitHub
-          </a>
+          {/* Switch + GitHub */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link
+              href="/recruiter"
+              className="flex items-center gap-2 px-3 py-1.5 text-cyber-blue border border-cyber-blue/30 rounded-lg text-sm hover:bg-cyber-blue/10 transition-colors"
+            >
+              <Shield className="w-4 h-4" />
+              Recruteur
+            </Link>
+            <a
+              href="https://github.com/Metsamgit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 bg-cyber-green/10 text-cyber-green font-mono text-sm rounded-lg border border-cyber-green/30 hover:bg-cyber-green/20 transition-colors"
+            >
+              <Github className="w-4 h-4" />
+              GitHub
+            </a>
+          </div>
         </div>
 
         {/* Mobile nav */}
@@ -75,17 +84,24 @@ export default function VisitorLayout({ children }) {
               href={href}
               end={end}
               className={({ isActive }) =>
-                `flex flex-col items-center gap-1 px-3 py-1 rounded-lg text-xs font-mono transition-all ${
+                `relative flex flex-col items-center gap-1 px-3 py-1 text-xs font-mono transition-all ${
                   isActive
                     ? 'text-cyber-green'
                     : 'text-gray-500 hover:text-cyber-green'
-                }`
+                } ${isActive ? 'after:absolute after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-4 after:h-0.5 after:bg-cyber-green after:rounded-full' : ''}`
               }
             >
               <Icon className="w-5 h-5" />
               {label}
             </NavLink>
           ))}
+          <Link
+            href="/recruiter"
+            className="flex flex-col items-center gap-1 px-3 py-1 text-xs text-cyber-blue"
+          >
+            <Shield className="w-5 h-5" />
+            Recruteur
+          </Link>
         </nav>
       </header>
 
@@ -98,25 +114,10 @@ export default function VisitorLayout({ children }) {
 
       {/* Footer - Terminal style */}
       <footer className="border-t border-cyber-green/10 py-6 px-4 bg-cyber-dark/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 font-mono text-sm text-gray-500">
-              <span className="text-cyber-green">$</span>
-              <span>Nathan Jupin • Cybersecurity Portfolio</span>
-            </div>
-            <div className="flex items-center gap-6">
-              <a
-                href="https://tryhackme.com/p/METSAM"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-cyber-green text-sm font-mono transition-colors"
-              >
-                TryHackMe
-              </a>
-              <Link href="/recruiter" className="text-gray-500 hover:text-cyber-blue text-sm font-mono transition-colors">
-                → recruiter_view
-              </Link>
-            </div>
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-2 font-mono text-sm text-gray-500">
+            <span className="text-cyber-green">$</span>
+            <span>© 2025 Nathan Jupin • Cybersecurity Portfolio</span>
           </div>
         </div>
       </footer>

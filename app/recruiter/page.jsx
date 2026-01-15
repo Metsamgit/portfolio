@@ -1,10 +1,14 @@
+'use client'
+
 import { MapPin, GraduationCap, Target, Download, Linkedin } from 'lucide-react'
+import AnimatedSection from '@/components/AnimatedSection'
 
 export default function RecruiterHome() {
   return (
     <div className="space-y-8">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-cyber-dark to-cyber-darker rounded-2xl p-8 border border-gray-800">
+      <AnimatedSection>
+        <section className="bg-gradient-to-br from-cyber-dark to-cyber-darker rounded-2xl p-8 border border-gray-800">
         <div className="flex flex-col md:flex-row items-center gap-8">
           {/* Avatar */}
           <div className="relative">
@@ -58,10 +62,12 @@ export default function RecruiterHome() {
             </a>
           </div>
         </div>
-      </section>
+        </section>
+      </AnimatedSection>
 
       {/* Quick Stats */}
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <AnimatedSection delay={100}>
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'Année', value: 'B2', sub: 'Ynov Cyber' },
           { label: 'Orientation', value: 'SOC', sub: '& Pentest' },
@@ -74,34 +80,102 @@ export default function RecruiterHome() {
             <p className="text-gray-500 text-sm">{stat.sub}</p>
           </div>
         ))}
-      </section>
+        </section>
+      </AnimatedSection>
+
+      {/* What I'm looking for - PRIORITAIRE */}
+      <AnimatedSection delay={200}>
+        <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
+          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 bg-cyber-blue rounded-full" />
+            Ce que je recherche
+          </h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          {[
+            {
+              title: 'Stage / Alternance',
+              desc: 'Disponible pour intégrer une équipe SOC ou une équipe de pentest',
+            },
+            {
+              title: 'Environnement technique',
+              desc: 'Entreprise avec une stack sécurité moderne et des défis stimulants',
+            },
+            {
+              title: 'Montée en compétences',
+              desc: 'Accompagnement pour préparer des certifications (SOC, OSCP...)',
+            },
+            {
+              title: 'Projets concrets',
+              desc: 'Participation à des audits, analyses d\'incidents, ou red team',
+            },
+          ].map((item, i) => (
+            <div key={i} className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
+              <h3 className="font-semibold text-white mb-1">{item.title}</h3>
+              <p className="text-gray-400 text-sm">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Soft Skills */}
+      <AnimatedSection delay={300}>
+        <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
+          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 bg-cyber-blue rounded-full" />
+            Soft Skills
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              'Curiosité technique',
+              'Résolution de problèmes',
+              'Veille sécurité',
+              'Travail en équipe',
+              'Autonomie',
+              'Documentation',
+              'Adaptabilité',
+              'Communication',
+            ].map((skill, i) => (
+              <div
+                key={i}
+                className="px-4 py-3 bg-cyber-darker rounded-lg border border-gray-700 text-center text-gray-300 text-sm"
+              >
+                {skill}
+              </div>
+            ))}
+          </div>
+        </section>
+      </AnimatedSection>
 
       {/* About */}
-      <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
-        <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-          <span className="w-2 h-2 bg-cyber-blue rounded-full" />
-          À propos
-        </h2>
-        <div className="text-gray-300 space-y-4">
-          <p>
-            Passionné par la <strong className="text-white">cybersécurité</strong> depuis mes débuts en informatique,
-            je me spécialise dans le <strong className="text-cyber-blue">SOC (Security Operations Center)</strong> et
-            le <strong className="text-cyber-blue">Pentest</strong> pour combiner analyse défensive et approche offensive.
-          </p>
-          <p>
-            J&apos;administre actuellement un <strong className="text-white">serveur dédié en production</strong> pour une boutique
-            de scripts FiveM/Minecraft, avec gestion de VMs pour les clients. J&apos;y ai déployé <strong className="text-cyber-blue">Wazuh</strong> et
-            <strong className="text-cyber-blue"> Suricata</strong> pour le monitoring SOC et la détection d&apos;intrusion.
-          </p>
-          <p>
-            Mon objectif : rejoindre une équipe SOC ou Red Team en alternance pour appliquer
-            mes compétences sur des cas réels, tout en préparant des certifications comme OSCP.
-          </p>
-        </div>
-      </section>
+      <AnimatedSection delay={400}>
+        <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
+          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 bg-cyber-blue rounded-full" />
+            À propos
+          </h2>
+          <div className="text-gray-300 space-y-4">
+            <p>
+              Passionné par la <strong className="text-white">cybersécurité</strong> depuis mes débuts en informatique,
+              je me spécialise dans le <strong className="text-cyber-blue">SOC (Security Operations Center)</strong> et
+              le <strong className="text-cyber-blue">Pentest</strong> pour combiner analyse défensive et approche offensive.
+            </p>
+            <p>
+              J&apos;administre actuellement un <strong className="text-white">serveur dédié en production</strong> pour une boutique
+              de scripts FiveM/Minecraft, avec gestion de VMs pour les clients. J&apos;y ai déployé <strong className="text-cyber-blue">Wazuh</strong> et
+              <strong className="text-cyber-blue"> Suricata</strong> pour le monitoring SOC et la détection d&apos;intrusion.
+            </p>
+            <p>
+              Mon objectif : rejoindre une équipe SOC ou Red Team en alternance pour appliquer
+              mes compétences sur des cas réels, tout en préparant des certifications comme OSCP.
+            </p>
+          </div>
+        </section>
+      </AnimatedSection>
 
       {/* Timeline */}
-      <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
+      <AnimatedSection delay={500}>
+        <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
         <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
           <span className="w-2 h-2 bg-cyber-blue rounded-full" />
           Mon parcours
@@ -163,40 +237,8 @@ export default function RecruiterHome() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* What I'm looking for */}
-      <section className="bg-cyber-dark rounded-2xl p-8 border border-gray-800">
-        <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-          <span className="w-2 h-2 bg-cyber-blue rounded-full" />
-          Ce que je recherche
-        </h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          {[
-            {
-              title: 'Stage / Alternance',
-              desc: 'Disponible pour intégrer une équipe SOC ou une équipe de pentest',
-            },
-            {
-              title: 'Environnement technique',
-              desc: 'Entreprise avec une stack sécurité moderne et des défis stimulants',
-            },
-            {
-              title: 'Montée en compétences',
-              desc: 'Accompagnement pour préparer des certifications (SOC, OSCP...)',
-            },
-            {
-              title: 'Projets concrets',
-              desc: 'Participation à des audits, analyses d\'incidents, ou red team',
-            },
-          ].map((item, i) => (
-            <div key={i} className="bg-cyber-darker rounded-lg p-4 border border-gray-700">
-              <h3 className="font-semibold text-white mb-1">{item.title}</h3>
-              <p className="text-gray-400 text-sm">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+        </section>
+      </AnimatedSection>
     </div>
   )
 }

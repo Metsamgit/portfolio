@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import NavLink from '@/components/NavLink'
-import { Home, Wrench, Briefcase, Mail, ArrowLeft } from 'lucide-react'
+import { Home, Wrench, Briefcase, Mail, ArrowLeft, Terminal } from 'lucide-react'
 
 const navItems = [
   { href: '/recruiter', icon: Home, label: 'Profil', end: true },
@@ -40,11 +40,11 @@ export default function RecruiterLayout({ children }) {
                 href={href}
                 end={end}
                 className={({ isActive }) =>
-                  `flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all ${
+                  `relative flex items-center gap-2 px-4 py-2 font-medium text-sm transition-all ${
                     isActive
-                      ? 'bg-cyber-blue/10 text-cyber-blue'
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
-                  }`
+                      ? 'text-cyber-blue'
+                      : 'text-gray-400 hover:text-white'
+                  } ${isActive ? 'after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-cyber-blue after:rounded-full' : ''}`
                 }
               >
                 <Icon className="w-4 h-4" />
@@ -53,14 +53,23 @@ export default function RecruiterLayout({ children }) {
             ))}
           </nav>
 
-          {/* CTA */}
-          <a
-            href="/cv-nathan-jupin.pdf"
-            download
-            className="hidden md:flex items-center gap-2 px-4 py-2 bg-cyber-blue text-cyber-dark font-semibold text-sm rounded-lg hover:bg-cyber-blue/90 transition-colors"
-          >
-            Télécharger CV
-          </a>
+          {/* Switch + CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link
+              href="/visitor"
+              className="flex items-center gap-2 px-3 py-1.5 text-cyber-green border border-cyber-green/30 rounded-lg text-sm hover:bg-cyber-green/10 transition-colors"
+            >
+              <Terminal className="w-4 h-4" />
+              Visiteur
+            </Link>
+            <a
+              href="/cv-nathan-jupin.pdf"
+              download
+              className="flex items-center gap-2 px-4 py-2 bg-cyber-blue text-cyber-dark font-semibold text-sm rounded-lg hover:bg-cyber-blue/90 transition-colors"
+            >
+              Télécharger CV
+            </a>
+          </div>
         </div>
 
         {/* Mobile nav */}
@@ -71,17 +80,24 @@ export default function RecruiterLayout({ children }) {
               href={href}
               end={end}
               className={({ isActive }) =>
-                `flex flex-col items-center gap-1 px-3 py-1 rounded-lg text-xs transition-all ${
+                `relative flex flex-col items-center gap-1 px-3 py-1 text-xs transition-all ${
                   isActive
                     ? 'text-cyber-blue'
                     : 'text-gray-500 hover:text-white'
-                }`
+                } ${isActive ? 'after:absolute after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-4 after:h-0.5 after:bg-cyber-blue after:rounded-full' : ''}`
               }
             >
               <Icon className="w-5 h-5" />
               {label}
             </NavLink>
           ))}
+          <Link
+            href="/visitor"
+            className="flex flex-col items-center gap-1 px-3 py-1 text-xs text-cyber-green"
+          >
+            <Terminal className="w-5 h-5" />
+            Visiteur
+          </Link>
         </nav>
       </header>
 
@@ -94,15 +110,10 @@ export default function RecruiterLayout({ children }) {
 
       {/* Footer */}
       <footer className="border-t border-gray-800 py-6 px-4">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="max-w-6xl mx-auto text-center">
           <p className="text-gray-500 text-sm font-mono">
-            © 2024 Nathan Jupin • Étudiant Cybersécurité
+            © 2025 Nathan Jupin • Étudiant Cybersécurité
           </p>
-          <div className="flex items-center gap-4">
-            <Link href="/visitor" className="text-gray-500 hover:text-cyber-green text-sm transition-colors">
-              → Vue visiteur
-            </Link>
-          </div>
         </div>
       </footer>
     </div>
