@@ -11,9 +11,8 @@ const Skills = () => {
       color: 'cyber-blue',
       description: 'SIEM, détection d\'intrusions, monitoring en production',
       tools: [
-        { name: 'Wazuh', detail: 'Déployé en production sur serveur dédié pour monitoring de VMs' },
-        { name: 'Splunk', detail: 'Analyse de logs et création de dashboards dans mon lab' },
-        { name: 'Suricata', detail: 'IDS/IPS en cours d\'intégration sur infra de prod' },
+        { name: 'Wazuh', detail: 'Déployé en production sur serveur dédié - SIEM + agents sur VMs' },
+        { name: 'Suricata', detail: 'IDS/IPS en production avec 47k+ règles Emerging Threats' },
         { name: 'Wireshark', detail: 'Analyse de trafic réseau, CTF et troubleshooting' },
         { name: 'ELK Stack', detail: 'Stack de logs pour centralisation et visualisation' },
       ]
@@ -50,10 +49,10 @@ const Skills = () => {
       color: 'orange-400',
       description: 'Serveurs dédiés, VMs, automatisation',
       tools: [
-        { name: 'Proxmox/VMs', detail: 'Gestion de VMs en production pour clients' },
+        { name: 'Proxmox', detail: 'Gestion de VMs en production pour clients sur serveur dédié' },
         { name: 'Docker', detail: 'Conteneurisation d\'applications et services' },
         { name: 'Linux Admin', detail: 'Administration serveurs Debian/Ubuntu en prod' },
-        { name: 'pfSense', detail: 'Firewall et routage dans mon lab SOC' },
+        { name: 'Fail2ban', detail: 'Anti-bruteforce configuré avec 150+ IPs bannies' },
         { name: 'Ansible', detail: 'Automatisation de déploiements' },
       ]
     },

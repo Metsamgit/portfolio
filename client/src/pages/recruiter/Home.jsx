@@ -1,4 +1,4 @@
-import { MapPin, GraduationCap, Target, Download, Linkedin, Mail } from 'lucide-react'
+import { MapPin, GraduationCap, Target, Download, Linkedin } from 'lucide-react'
 
 const Home = () => {
   return (
@@ -48,11 +48,13 @@ const Home = () => {
               Télécharger CV
             </a>
             <a
-              href="mailto:contact@example.com"
+              href="https://www.linkedin.com/in/nathan-jupin/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 px-6 py-3 border border-gray-700 text-white rounded-lg hover:border-cyber-blue hover:text-cyber-blue transition-colors"
             >
-              <Mail className="w-4 h-4" />
-              Contact
+              <Linkedin className="w-4 h-4" />
+              LinkedIn
             </a>
           </div>
         </div>
@@ -88,8 +90,8 @@ const Home = () => {
           </p>
           <p>
             J'administre actuellement un <strong className="text-white">serveur dédié en production</strong> pour une boutique
-            de scripts FiveM/Minecraft, avec gestion de VMs pour les clients. J'y ai déployé <strong className="text-cyber-blue">Wazuh</strong> pour
-            le monitoring et prépare l'intégration de <strong className="text-cyber-blue">Suricata</strong> pour l'analyse réseau.
+            de scripts FiveM/Minecraft, avec gestion de VMs pour les clients. J'y ai déployé <strong className="text-cyber-blue">Wazuh</strong> et
+            <strong className="text-cyber-blue"> Suricata</strong> pour le monitoring SOC et la détection d'intrusion.
           </p>
           <p>
             Mon objectif : rejoindre une équipe SOC ou Red Team en alternance pour appliquer
@@ -129,8 +131,8 @@ const Home = () => {
             },
             {
               year: '2024',
-              title: 'Création de mon lab personnel',
-              desc: 'Stack Splunk, pfSense pour simulation d\'attaques',
+              title: 'Création de mon lab SOC',
+              desc: 'Stack Wazuh, Suricata pour monitoring et détection',
               current: false
             },
             {

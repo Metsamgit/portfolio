@@ -1,18 +1,12 @@
-import { Mail, Linkedin, Github, MapPin, FileDown } from 'lucide-react'
+import { Linkedin, Github, MapPin, FileDown } from 'lucide-react'
 
 const Contact = () => {
   const contactInfo = [
     {
-      icon: Mail,
-      label: 'Email',
-      value: 'votre@email.com',
-      href: 'mailto:votre@email.com',
-    },
-    {
       icon: Linkedin,
       label: 'LinkedIn',
-      value: '/in/votre-profil',
-      href: 'https://linkedin.com/in/votre-profil',
+      value: '/in/nathan-jupin',
+      href: 'https://www.linkedin.com/in/nathan-jupin/',
     },
     {
       icon: Github,
@@ -23,7 +17,7 @@ const Contact = () => {
     {
       icon: MapPin,
       label: 'Localisation',
-      value: 'France',
+      value: 'Lille, France',
       href: null,
     },
   ]

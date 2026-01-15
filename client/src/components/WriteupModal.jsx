@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { X, ExternalLink, Clock, Target, Tag, Flag, ArrowRight } from 'lucide-react'
+import { X, Clock, Target, Tag, Flag } from 'lucide-react'
 
 const WriteupModal = ({ writeup, isOpen, onClose }) => {
   // Fermer avec Escape
@@ -38,7 +38,7 @@ const WriteupModal = ({ writeup, isOpen, onClose }) => {
       />
 
       {/* Modal */}
-      <div className="relative bg-cyber-dark border border-cyber-green/30 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl shadow-cyber-green/10 animate-in fade-in zoom-in duration-200">
+      <div className="relative bg-cyber-dark border border-cyber-green/30 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl shadow-cyber-green/10 animate-in fade-in zoom-in duration-200">
         {/* Header */}
         <div className="flex items-start justify-between p-6 border-b border-gray-800">
           <div>
@@ -58,8 +58,8 @@ const WriteupModal = ({ writeup, isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Content */}
-        <div className="p-6 overflow-y-auto max-h-[60vh]">
+        {/* Scrollable Content */}
+        <div className="p-6 overflow-y-auto max-h-[70vh]">
           {/* Meta info */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="bg-cyber-darker rounded-lg p-3">
@@ -104,66 +104,97 @@ const WriteupModal = ({ writeup, isOpen, onClose }) => {
             ))}
           </div>
 
-          {/* Description */}
-          <div className="mb-6">
-            <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-              <span className="w-1 h-4 bg-cyber-green rounded-full" />
-              Description
-            </h3>
-            <p className="text-gray-400 leading-relaxed">
-              {writeup.description}
-            </p>
+          {/* Full Writeup Content */}
+          <div className="writeup-content space-y-6">
+            {writeup.content ? (
+              writeup.content.map((section, i) => (
+                <div key={i}>
+                  {section.type === 'heading' && (
+                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                      <span className="w-1 h-4 bg-cyber-green rounded-full" />
+                      {section.text}
+                    </h3>
+                  )}
+                  {section.type === 'text' && (
+                    <p className="text-gray-400 leading-relaxed">{section.text}</p>
+                  )}
+                  {section.type === 'code' && (
+                    <div className="bg-cyber-darker rounded-lg p-4 border border-gray-800 font-mono text-sm overflow-x-auto">
+                      <pre className="text-cyber-green whitespace-pre-wrap">{section.text}</pre>
+                    </div>
+                  )}
+                  {section.type === 'flag' && (
+                    <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 font-mono text-green-400">
+                      🚩 {section.text}
+                    </div>
+                  )}
+                  {section.type === 'image' && (
+                    <div className="rounded-lg overflow-hidden border border-gray-800">
+                      <img src={section.src} alt={section.alt || ''} className="w-full" />
+                    </div>
+                  )}
+                  {section.type === 'list' && (
+                    <ul className="space-y-2">
+                      {section.items.map((item, j) => (
+                        <li key={j} className="flex items-start gap-2 text-gray-400">
+                          <span className="text-cyber-green mt-1">→</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))
+            ) : (
+              <>
+                {/* Fallback to old format */}
+                <div>
+                  <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                    <span className="w-1 h-4 bg-cyber-green rounded-full" />
+                    Description
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed">{writeup.description}</p>
+                </div>
+                {writeup.summary && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                      <span className="w-1 h-4 bg-cyber-green rounded-full" />
+                      Résumé
+                    </h3>
+                    <div className="bg-cyber-darker rounded-lg p-4 border border-gray-800 font-mono text-sm text-gray-300">
+                      {writeup.summary}
+                    </div>
+                  </div>
+                )}
+                {writeup.skills && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                      <span className="w-1 h-4 bg-cyber-green rounded-full" />
+                      Compétences travaillées
+                    </h3>
+                    <ul className="space-y-2">
+                      {writeup.skills.map((skill, i) => (
+                        <li key={i} className="flex items-center gap-2 text-gray-400">
+                          <span className="text-cyber-green">→</span>
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            )}
           </div>
-
-          {/* Preview / Summary */}
-          {writeup.summary && (
-            <div className="mb-6">
-              <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-                <span className="w-1 h-4 bg-cyber-green rounded-full" />
-                Résumé
-              </h3>
-              <div className="bg-cyber-darker rounded-lg p-4 border border-gray-800 font-mono text-sm text-gray-300">
-                {writeup.summary}
-              </div>
-            </div>
-          )}
-
-          {/* Skills learned */}
-          {writeup.skills && (
-            <div>
-              <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-                <span className="w-1 h-4 bg-cyber-green rounded-full" />
-                Compétences travaillées
-              </h3>
-              <ul className="space-y-2">
-                {writeup.skills.map((skill, i) => (
-                  <li key={i} className="flex items-center gap-2 text-gray-400">
-                    <span className="text-cyber-green">→</span>
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between p-6 border-t border-gray-800 bg-cyber-darker/50">
+        <div className="flex items-center justify-end p-6 border-t border-gray-800 bg-cyber-darker/50">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+            className="px-6 py-3 bg-cyber-green text-cyber-dark font-semibold rounded-lg hover:bg-cyber-green/90 transition-colors"
           >
             Fermer
           </button>
-          <a
-            href={writeup.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-cyber-green text-cyber-dark font-semibold rounded-lg hover:bg-cyber-green/90 transition-colors"
-          >
-            Lire le writeup complet
-            <ExternalLink className="w-4 h-4" />
-          </a>
         </div>
       </div>
 
