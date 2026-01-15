@@ -18,31 +18,25 @@ jobs:
         with:
           node-version: '20'
 
-      # Build Client
-      - name: Install client dependencies
+      # Build Next.js static site
+      - name: Install dependencies
         run: npm ci
-        working-directory: ./client
 
-      - name: Build client
+      - name: Build static site
         run: npm run build
-        working-directory: ./client
-        env:
-          VITE_API_URL: http://quantum-network.fr:3001
-          VITE_SERVER_API_URL: ${{ secrets.VITE_SERVER_API_URL }}
-          VITE_SERVER_API_TOKEN: ${{ secrets.VITE_SERVER_API_TOKEN }}
 
-      # Deploy Client
-      - name: Deploy client to VPS
+      # Deploy static site
+      - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "client/dist/*"
+          source: "out/*"
           target: ${{ secrets.VPS_PATH }}/client/dist
-          strip_components: 2
+          strip_components: 1
 
-      # Deploy Server
+      # Deploy Server (keep Express API for THM stats)
       - name: Deploy server to VPS
         uses: appleboy/scp-action@v0.1.7
         with:

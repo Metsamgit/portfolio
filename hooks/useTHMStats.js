@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 
-// URL de l'API - utilise la route handler Next.js
-const API_URL = process.env.NEXT_PUBLIC_API_URL || ''
+// URL de l'API Express (static export = pas de Route Handlers runtime)
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://quantum-network.fr:3001'
 
 export const useTHMStats = () => {
   const [stats, setStats] = useState({
