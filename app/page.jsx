@@ -114,6 +114,10 @@ export default function Landing() {
           95% { opacity: 1; transform: translateX(-200px) translateY(100px); }
           96% { opacity: 0; transform: translateX(-250px) translateY(125px); }
         }
+        @keyframes arrowPulse {
+          0%, 100% { transform: translateX(0); opacity: 0.7; }
+          50% { transform: translateX(4px); opacity: 1; }
+        }
       `}</style>
 
       {/* Main content */}
@@ -155,42 +159,56 @@ export default function Landing() {
             {/* Recruiter Card */}
             <button
               onClick={() => handleChoice('/recruiter')}
-              className="group relative bg-cyber-dark/80 backdrop-blur-sm border border-gray-700 hover:border-cyber-blue rounded-xl p-6 w-full md:w-72 text-left transition-all duration-300 hover:glow-blue"
+              className="group relative bg-cyber-dark/80 backdrop-blur-sm border-2 border-gray-700 hover:border-cyber-blue rounded-xl p-6 w-full md:w-72 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(0,212,255,0.15)] cursor-pointer"
             >
               <div className="absolute top-0 right-0 w-20 h-20 bg-cyber-blue/5 rounded-bl-full" />
-              <Shield className="w-10 h-10 text-cyber-blue mb-4 group-hover:scale-110 transition-transform" />
-              <h2 className="text-xl font-semibold text-white mb-2 flex items-center gap-2">
+              <div className="flex items-start justify-between mb-4">
+                <Shield className="w-10 h-10 text-cyber-blue group-hover:scale-110 transition-transform" />
+                <ChevronRight
+                  className="w-6 h-6 text-cyber-blue group-hover:translate-x-2 transition-transform duration-300"
+                  style={{ animation: 'arrowPulse 2s ease-in-out infinite' }}
+                />
+              </div>
+              <h2 className="text-xl font-semibold text-white mb-1">
                 Recruteur
-                <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
               </h2>
-              <p className="text-gray-400 text-sm mb-4">
-                CV, compétences techniques, expériences et formations
+              <p className="text-cyber-blue text-sm mb-4 flex items-center gap-1">
+                Voir mon profil complet
               </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-2 py-1 bg-cyber-blue/10 text-cyber-blue text-xs rounded font-mono">cv.pdf</span>
-                <span className="px-2 py-1 bg-cyber-blue/10 text-cyber-blue text-xs rounded font-mono">skills</span>
-                <span className="px-2 py-1 bg-cyber-blue/10 text-cyber-blue text-xs rounded font-mono">contact</span>
+              <div className="flex flex-wrap gap-2 text-gray-500 text-xs font-mono">
+                <span>cv</span>
+                <span>·</span>
+                <span>skills</span>
+                <span>·</span>
+                <span>contact</span>
               </div>
             </button>
 
             {/* Visitor Card */}
             <button
               onClick={() => handleChoice('/visitor')}
-              className="group relative bg-cyber-dark/80 backdrop-blur-sm border border-gray-700 hover:border-cyber-green rounded-xl p-6 w-full md:w-72 text-left transition-all duration-300 hover:glow-green"
+              className="group relative bg-cyber-dark/80 backdrop-blur-sm border-2 border-gray-700 hover:border-cyber-green rounded-xl p-6 w-full md:w-72 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(0,255,136,0.15)] cursor-pointer"
             >
               <div className="absolute top-0 right-0 w-20 h-20 bg-cyber-green/5 rounded-bl-full" />
-              <Terminal className="w-10 h-10 text-cyber-green mb-4 group-hover:scale-110 transition-transform" />
-              <h2 className="text-xl font-semibold text-white mb-2 flex items-center gap-2">
+              <div className="flex items-start justify-between mb-4">
+                <Terminal className="w-10 h-10 text-cyber-green group-hover:scale-110 transition-transform" />
+                <ChevronRight
+                  className="w-6 h-6 text-cyber-green group-hover:translate-x-2 transition-transform duration-300"
+                  style={{ animation: 'arrowPulse 2s ease-in-out infinite', animationDelay: '0.5s' }}
+                />
+              </div>
+              <h2 className="text-xl font-semibold text-white mb-1">
                 Visiteur
-                <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
               </h2>
-              <p className="text-gray-400 text-sm mb-4">
-                Projets GitHub, writeups CTF, labs et stats TryHackMe
+              <p className="text-cyber-green text-sm mb-4 flex items-center gap-1">
+                Explorer mes projets
               </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-2 py-1 bg-cyber-green/10 text-cyber-green text-xs rounded font-mono">projects</span>
-                <span className="px-2 py-1 bg-cyber-green/10 text-cyber-green text-xs rounded font-mono">writeups</span>
-                <span className="px-2 py-1 bg-cyber-green/10 text-cyber-green text-xs rounded font-mono">thm</span>
+              <div className="flex flex-wrap gap-2 text-gray-500 text-xs font-mono">
+                <span>writeups</span>
+                <span>·</span>
+                <span>lab</span>
+                <span>·</span>
+                <span>thm</span>
               </div>
             </button>
           </div>
