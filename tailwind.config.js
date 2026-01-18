@@ -7,6 +7,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Dynamic theme colors (change with light/dark mode)
+        'theme-bg': 'rgb(var(--color-bg-primary) / <alpha-value>)',
+        'theme-bg-secondary': 'rgb(var(--color-bg-secondary) / <alpha-value>)',
+        'theme-card': 'rgb(var(--color-bg-card) / <alpha-value>)',
+        'theme-text': 'rgb(var(--color-text-primary) / <alpha-value>)',
+        'theme-text-secondary': 'rgb(var(--color-text-secondary) / <alpha-value>)',
+        'theme-text-muted': 'rgb(var(--color-text-muted) / <alpha-value>)',
+        'theme-border': 'rgb(var(--color-border) / <alpha-value>)',
+        'theme-accent-green': 'rgb(var(--color-accent-green) / <alpha-value>)',
+        'theme-accent-blue': 'rgb(var(--color-accent-blue) / <alpha-value>)',
+        'theme-accent-purple': 'rgb(var(--color-accent-purple) / <alpha-value>)',
+        // Static cyber colors (for backwards compatibility)
         cyber: {
           dark: '#0a0a0f',
           darker: '#050508',
